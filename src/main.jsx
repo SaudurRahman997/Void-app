@@ -1,13 +1,36 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
 import './index.css'; // or whatever your Tailwind CSS file is
-
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import App from './App.jsx'
+import EarthScene from './components/earthScene.jsx';
+import Planets from './components/planets.jsx';
+import Layout from './components/layout.jsx';
+const router = createBrowserRouter([
+  {
+    path: '/',
+    element: <Layout />,
+    children: [
+      {
+        path: '',
+        element: <EarthScene />
+      },
+      {
+        path: 'planets',
+        element: <Planets />
+      },
+
+
+    ]
+
+
+  }
+])
 
 
 
 createRoot(document.getElementById('root')).render(
   <StrictMode>
-    <App />
+    <RouterProvider router={router} />
   </StrictMode>,
 )

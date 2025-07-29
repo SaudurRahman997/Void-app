@@ -1,5 +1,6 @@
 // Navbar.jsx
 import { motion } from "framer-motion";
+import { Link, NavLink } from "react-router-dom";
 
 function Navbar() {
     return (
@@ -18,9 +19,36 @@ function Navbar() {
                     transition={{ duration: 0.8, ease: "easeOut", delay: 0.5 }}
                     className="flex gap-12 w-[700px] bg-gray-800 text-white px-10 py-4 rounded-xl shadow-lg justify-between"
                 >
-                    <li className="cursor-pointer hover:text-blue-300 transition font-glitch">Galaxies</li>
-                    <li className="cursor-pointer  hover:text-blue-300 transition font-glitch">PLANETS</li>
-                    <li className="cursor-pointer  hover:text-blue-300 transition font-glitch">Stars</li>
+                    <NavLink
+                        to="/galaxies"
+                        className={({ isActive }) =>
+                            `cursor-pointer hover:text-blue-300 transition font-glitch ${isActive ? "text-blue-300" : "bg-gray-800"
+                            }`
+                        }
+                    >
+                        Galaxies
+                    </NavLink>
+
+                    <NavLink
+                        to="/stars"
+                        className={({ isActive }) =>
+                            `cursor-pointer hover:text-blue-300 transition font-glitch ${isActive ? "text-blue-300" : "bg-gray-800"
+                            }`
+                        }
+                    >
+                        Stars
+                    </NavLink>
+
+                    <NavLink
+                        to="/planets"
+                        className={({ isActive }) =>
+                            `cursor-pointer hover:text-blue-300 transition font-glitch ${isActive ? "text-blue-300" : "bg-gray-800"
+                            }`
+                        }
+                    >
+                        Planets
+                    </NavLink>
+
                 </motion.ul>
 
                 <motion.div
@@ -34,37 +62,7 @@ function Navbar() {
 
 
             </nav>
-            <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10">
-                <div className="text-white text-8xl font-glitch">
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 2 }}
-                        className="p-3"
-                    >
-                        Enter
-                    </motion.h1>
 
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 3 }}
-                        className="p-3"
-                    >
-                        The void
-                    </motion.h1>
-
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 4 }}
-                        className="p-3"
-                    >
-                        of infinity
-                    </motion.h1>
-                </div>
-
-            </div>
         </>
     );
 }
