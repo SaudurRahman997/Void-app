@@ -5,4 +5,23 @@
 @font-face {
     font-family: 'Beauty Glitch Demo';
     src: url('./assets/fonts/Beauty_Glitch_Demo.ttf') format('opentype');
+
+}
+
+@font-face {
+    font-family: 'Orbitron Light';
+    src: url('./assets/fonts/Orbitron_Light.ttf') format('opentype');
+
+}
+
+@font-face {
+    font-family: 'Futura Rener';
+    src: url('./assets/fonts/futura_regular-webfont.ttf') format('opentype');
+
+}
+
+@font-face {
+    font-family: 'Neuropol';
+    src: url('./assets/fonts/Neuropol_X.otf') format('opentype');
+
 }

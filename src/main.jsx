@@ -6,6 +6,7 @@ import App from './App.jsx'
 import EarthScene from './components/earthScene.jsx';
 import Planets from './components/planets.jsx';
 import Layout from './components/layout.jsx';
+import Galaxies from './components/galaxies.jsx';
 const router = createBrowserRouter([
   {
     path: '/',
@@ -19,6 +20,10 @@ const router = createBrowserRouter([
         path: 'planets',
         element: <Planets />
       },
+      {
+        path: 'galaxies',
+        element: <Galaxies />
+      }
 
 
     ]

@@ -1,28 +1,30 @@
 // src/pages/Galaxies.jsx
 import Background from "./background";
 import { useRef } from "react";
-import Acrossbackground from "./acrossbackground";
+import Planets9 from "./planets9";
+
 export default function Planets() {
     const mercuryTriggerRef = useRef(null);
     return (
         <>
-            <Background trigger={mercuryTriggerRef} />
+            <Background />
+
             <div style={{ position: 'relative', zIndex: 1 }}>
-                <section style={{ height: '100vh', padding: '2rem' }} ref={mercuryTriggerRef}>
-                    <Acrossbackground />
-                    <h1 style={{ color: 'white' }}>Welcome to the Solar System</h1>
+                <section style={{ height: '100vh' }} ref={mercuryTriggerRef}>
+
+
+                    <Planets9 trigger={mercuryTriggerRef} />
                 </section>
 
-                {/* <section style={{ height: '100vh', padding: '2rem' }}>
-                    <p style={{ color: 'white' }}>
-                        Scroll down to learn about planets. You can add more content here.
-                    </p>
+                <section style={{ height: '100vh', padding: '2rem' }} >
+
                 </section>
 
                 <section style={{ height: '100vh', padding: '2rem' }}>
-                    <h2 style={{ color: 'white' }}>Explore More</h2>
-                </section> */}
+
+                </section>
             </div>
+
         </>
     );
 }
