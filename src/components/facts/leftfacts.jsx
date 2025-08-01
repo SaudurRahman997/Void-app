@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-//import galaxyFacts from "./galaxyfacts";
+
 
 export default function LeftFacts({ fact, galaxy }) {
 
