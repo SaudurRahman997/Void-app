@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import gsap from 'gsap';
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import createLabel from './accessories/planetlabels';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -47,57 +48,74 @@ const Planets9 = ({ trigger }) => {
         const material = new THREE.MeshStandardMaterial({ map: mercuryTexture });
         const mercury = new THREE.Mesh(geometry, material);
         mercury.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        mercury.position.set(-7, 2, 1);
+        mercury.position.set(-8, 3, 1);
         mercury.scale.set(0.4, 0.4, 0.4);
+        const mercuryLabel = createLabel("Mercury", mercury.position, "mercury-section");
+        scene.add(mercuryLabel);
+
         scene.add(mercury);
 
         const material1 = new THREE.MeshStandardMaterial({ map: venusTexture });
         const venus = new THREE.Mesh(geometry, material1);
         venus.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        venus.position.set(0, 2, 1);
+        venus.position.set(-3, 1, 1);
         venus.scale.set(0.4, 0.4, 0.4);
+        const venusLabel = createLabel("Venus", venus.position, "venus-section");
+        scene.add(venusLabel);
         scene.add(venus);
 
         const material2 = new THREE.MeshStandardMaterial({ map: earthTexture });
         const earth = new THREE.Mesh(geometry, material2);
         earth.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        earth.position.set(7, 2, 1);
+        earth.position.set(2, 3, 1);
         earth.scale.set(0.4, 0.4, 0.4);
+        const earthLabel = createLabel("Earth", earth.position, "earth-section");
+        scene.add(earthLabel);
         scene.add(earth);
 
         const material3 = new THREE.MeshStandardMaterial({ map: marsTexture });
         const mars = new THREE.Mesh(geometry, material3);
         mars.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        mars.position.set(-7, -1, 1);
+        mars.position.set(7, 1, 1);
         mars.scale.set(0.4, 0.4, 0.4);
+        const marsLabel = createLabel("Mars", mars.position, "mars-section");
+        scene.add(marsLabel);
         scene.add(mars);
 
         const material4 = new THREE.MeshStandardMaterial({ map: jupiterTexture });
         const jupiter = new THREE.Mesh(geometry, material4);
         jupiter.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        jupiter.position.set(0, -1, 1);
+        jupiter.position.set(-8, -1, 1);
         jupiter.scale.set(0.4, 0.4, 0.4);
+        const jupiterLabel = createLabel("Jupiter", jupiter.position, "jupiter-section");
+        scene.add(jupiterLabel);
         scene.add(jupiter);
 
         const material5 = new THREE.MeshStandardMaterial({ map: saturnTexture });
         const saturn = new THREE.Mesh(geometry, material5);
         saturn.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        saturn.position.set(7, -1, 1);
+        saturn.position.set(-3, -3, 1);
         saturn.scale.set(0.4, 0.4, 0.4);
+        const saturnLabel = createLabel("Saturn", saturn.position, "saturn-section");
+        scene.add(saturnLabel);
         scene.add(saturn);
 
         const material8 = new THREE.MeshStandardMaterial({ map: uranusTexture });
         const uranus = new THREE.Mesh(geometry, material8);
         uranus.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        uranus.position.set(-3.5, -4, 1);
+        uranus.position.set(2, -1, 1);
         uranus.scale.set(0.4, 0.4, 0.4);
+        const uranusLabel = createLabel("Uranus", uranus.position, "uranus-section");
+        scene.add(uranusLabel);
         scene.add(uranus);
 
         const material9 = new THREE.MeshStandardMaterial({ map: neptuneTexture });
         const neptune = new THREE.Mesh(geometry, material9);
         neptune.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
-        neptune.position.set(3.5, -4, 1);
+        neptune.position.set(7, -3, 1);
         neptune.scale.set(0.4, 0.4, 0.4);
+        const neptuneLabel = createLabel("Neptune", neptune.position, "neptune-section");
+        scene.add(neptuneLabel);
         scene.add(neptune);
 
 
@@ -181,14 +199,14 @@ const Planets9 = ({ trigger }) => {
         // controls.enablePan = false;
         //controls.autoRotate = true;
         //controls.autoRotateSpeed = 0.5;
-        // const handleResize = () => {
-        //     width = window.innerWidth;
-        //     height = window.innerHeight;
-        //     camera.aspect = width / height;
-        //     camera.updateProjectionMatrix();
-        //     renderer.setSize(width, height);
-        // };
-        // window.addEventListener('resize', handleResize);
+        const handleResize = () => {
+            width = window.innerWidth;
+            height = window.innerHeight;
+            camera.aspect = width / height;
+            camera.updateProjectionMatrix();
+            renderer.setSize(width, height);
+        };
+        window.addEventListener('resize', handleResize);
 
         const animate = () => {
             // controls.update();
@@ -209,24 +227,52 @@ const Planets9 = ({ trigger }) => {
 
         animate();
 
-        if (trigger?.current) {
-            gsap.to(mercury.position, {
-                scrollTrigger: {
-                    trigger: trigger.current,
-                    start: "top center",
-                    end: "bottom center",
-                    scrub: true,
-                    markers: true,
-                },
-                x: 5,
-                y: -15,
-            });
+        // if (trigger?.current) {
+        //     gsap.to(mercury.position, {
+        //         scrollTrigger: {
+        //             trigger: trigger.current,
+        //             start: "top center",
+        //             end: "bottom center",
+        //             scrub: true,
+        //             markers: true,
+        //         },
+        //         x: 5,
+        //         y: -15,
+        //     });
+        // }
+        const raycaster = new THREE.Raycaster();
+        const mouse = new THREE.Vector2();
+
+        function onClick(event) {
+            // Adjust for canvas offset
+            const rect = renderer.domElement.getBoundingClientRect();
+
+            mouse.x = ((event.clientX - rect.left) / rect.width) * 2 - 1;
+            mouse.y = -((event.clientY - rect.top) / rect.height) * 2 + 1;
+
+            raycaster.setFromCamera(mouse, camera);
+            const intersects = raycaster.intersectObjects(scene.children);
+
+            for (let i = 0; i < intersects.length; i++) {
+                const object = intersects[i].object;
+                if (object.userData.sectionId) {
+                    const section = document.getElementById(object.userData.sectionId);
+                    if (section) {
+                        section.scrollIntoView({ behavior: 'smooth' });
+                    }
+                    break;
+                }
+            }
         }
 
+        window.addEventListener('click', onClick, false);
+
+
+
         return () => {
-            //window.removeEventListener("resize", handleResize);
+            window.removeEventListener("resize", handleResize);
             //controls.dispose();
-            ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // 🔥 kill all triggers
+            //  ScrollTrigger.getAll().forEach(trigger => trigger.kill()); // 🔥 kill all triggers
             //mercuryTween.kill(); // ✅ kill the tween itself
             if (rendererRef.current) {
                 rendererRef.current.dispose();
