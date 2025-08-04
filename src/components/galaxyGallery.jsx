@@ -3,15 +3,15 @@ import { motion, AnimatePresence } from "framer-motion";
 import GalaxyCard from "./galaxyCard"; // assume this is your card component
 import NextPrevButtons from "./nextPrev";
 const cards = [
-  { image: "/textures/UGC.jpg", title: "UGC" },
-  { image: "/textures/whirlpool.jpg", title: "Whirlpool" },
-  { image: "/textures/milkyway.jpeg", title: "Milky Way" },
-  { image: "/textures/sombrero.jpg", title: "Sombrero" },
-  { image: "/textures/triangulum.jpg", title: "Triangulum" },
-  { image: "/textures/pinwheel.jpg", title: "Pinwheel" },
-  { image: "/textures/messier.jpeg", title: "Messier" },
-  { image: "/textures/centaurus.jpg", title: "Centaurus A" },
-  { image: "/textures/Andromeda.jpg", title: "Andromeda" },
+  { image: "/textures/UGC.jpg", title: "UGC", targetId: "c-section" },
+  { image: "/textures/whirlpool.jpg", title: "Whirlpool", targetId: "i-section" },
+  { image: "/textures/milkyway.jpeg", title: "Milky Way", targetId: "a-section" },
+  { image: "/textures/sombrero.jpg", title: "Sombrero", targetId: "b-section" },
+  { image: "/textures/triangulum.jpg", title: "Triangulum", targetId: "d-section" },
+  { image: "/textures/pinwheel.jpg", title: "Pinwheel", targetId: "h-section" },
+  { image: "/textures/messier.jpeg", title: "Messier", targetId: "g-section" },
+  { image: "/textures/centaurus.jpg", title: "Centaurus A", targetId: "f-section" },
+  { image: "/textures/Andromeda.jpg", title: "Andromeda", targetId: "e-section" },
 ];
 
 export default function CardSlider() {
@@ -41,7 +41,7 @@ export default function CardSlider() {
                 }}
                 transition={{ type: "spring", stiffness: 300, damping: 30 }}
               >
-                <GalaxyCard image={card.image} title={card.title} />
+                <GalaxyCard image={card.image} title={card.title} targetId={card.targetId} />
               </motion.div>
             );
           })

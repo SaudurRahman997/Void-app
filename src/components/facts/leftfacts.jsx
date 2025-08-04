@@ -35,7 +35,7 @@ export default function LeftFacts({ fact, galaxy }) {
             <div className="w-1/2 p-6
 
 border-3 border-white animate-glow">
-                <h2 className="text-2xl font-orbitron mb-4">Galaxy Facts</h2>
+                <h2 className="text-2xl font-orbitron mb-4 text-blue-400">Galaxy Facts</h2>
                 <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
                     {facts.map((fact, idx) => (
                         <li key={idx} className="text-sm">
@@ -53,15 +53,15 @@ border-3 border-white animate-glow">
                     />
                     <button
                         onClick={handleAdd}
-                        className="px-4 py-2 bg-blue-500 hover:bg-blue-600 rounded text-white"
+                        className="px-4 py-2 bg-blue-500 hover:bg-blue-400 rounded text-white"
                     >
                         +
                     </button>
                 </div>
             </div>
 
-            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl overflow-y-auto max-h-[650px]">
-                <h2 className="text-xl font-semibold mb-4 font-orbitron">{galaxy} Gallery</h2>
+            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl  max-h-[650px] overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-800">
+                <h2 className="text-xl font-semibold mb-4 font-orbitron text-blue-400">{galaxy} Gallery</h2>
                 <div className="grid grid-cols-2 gap-0 w-full h-[400px] ">
                     {images.length > 0 ? (
                         images.map((url, index) => (

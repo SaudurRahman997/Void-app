@@ -3,6 +3,7 @@ import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import gsap from 'gsap';
 import { motion } from "framer-motion";
+
 const EarthScene = () => {
     const containerRef = useRef(null);
     const rendererRef = useRef();
@@ -22,7 +23,6 @@ const EarthScene = () => {
         scene.background = new THREE.Color(0x000000); // black
 
         const geometry = new THREE.SphereGeometry(3, 64, 64);
-
         const geometry1 = new THREE.SphereGeometry(3, 64, 64);
 
         const material1 = new THREE.MeshStandardMaterial({ map: sunTexture });
@@ -35,20 +35,24 @@ const EarthScene = () => {
         const earth = new THREE.Mesh(geometry, material);
         earth.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
 
-        // ❗Set starting position off-screen
         earth.position.set(0, -50, -20);
-        earth.scale.set(2, 2, 2);
-        scene.add(earth);
 
+        // 🌐 Responsive Earth scale
+        let earthScale = 2;
+        if (window.innerWidth < 768) {
+            earthScale = 1.2; // Smaller for mobile
+        }
+        earth.scale.set(earthScale, earthScale, earthScale);
+
+        scene.add(earth);
 
         // ✅ Animate into place using GSAP
         gsap.to(earth.position, {
             duration: 1,
-            x: 6,     // final position x
-            y: -2,    // final position y
-            z: 0,     // final position z
+            x: 6,
+            y: -2,
+            z: 0,
             ease: "power4.out",
-            // (amplitude, period)
             delay: 0.5
         });
 
@@ -74,18 +78,15 @@ const EarthScene = () => {
 
         for (let i = 0; i < starCount; i++) {
             const index = i * 3;
-            const { x, y, z } = randomSpherePoint(100, 300); // distance range from center
+            const { x, y, z } = randomSpherePoint(100, 300);
             starPositions[index] = x;
             starPositions[index + 1] = y;
             starPositions[index + 2] = z;
         }
 
-
-
         starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
 
         const starMaterial = new THREE.PointsMaterial({
-            color: '#87CEEB',
             size: 0.5,
             sizeAttenuation: true,
             transparent: true,
@@ -98,12 +99,11 @@ const EarthScene = () => {
         const stars = new THREE.Points(starGeometry, starMaterial);
         scene.add(stars);
 
-        // ☀️ Simulated Sunlight
+        // ☀️ Lighting
         const sunlight = new THREE.DirectionalLight(0xfff5c0, 2);
-        sunlight.position.set(10, 10, 5); // Upper-left direction
+        sunlight.position.set(10, 10, 5);
         scene.add(sunlight);
 
-        // Optional ambient fill light
         const ambient = new THREE.AmbientLight(0xffffff, 0.1);
         scene.add(ambient);
 
@@ -122,20 +122,29 @@ const EarthScene = () => {
         controls.enableZoom = false;
         controls.enablePan = false;
         controls.autoRotate = true;
-        controls.autoRotateSpeed = 0.5;
+        controls.autoRotateSpeed = 4;
+
         const handleResize = () => {
             width = window.innerWidth;
             height = window.innerHeight;
             camera.aspect = width / height;
             camera.updateProjectionMatrix();
             renderer.setSize(width, height);
+
+            // 📱 Adjust earth scale on resize
+            if (window.innerWidth < 768) {
+                earth.scale.set(1.2, 1.2, 1.2);
+            } else {
+                earth.scale.set(2, 2, 2);
+            }
         };
+
         window.addEventListener('resize', handleResize);
 
         const animate = () => {
             controls.update();
-            sun.rotation.y += 0.01; // Rotates around its own Y-axis
-            earth.rotation.y += 0.001; // Rotates around its own Y-axis
+            sun.rotation.y += 0.05;
+            earth.rotation.y += 0.010;
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         };
@@ -155,41 +164,45 @@ const EarthScene = () => {
 
     return (
         <>
-            <div
-                ref={containerRef}
-                style={{ width: '100vw', height: '100vh', overflow: 'hidden', position: 'relative', zIndex: 0 }}
-
-            />
-            <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10">
-                <div className="text-white text-8xl font-glitch">
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 2 }}
-                        className="p-3"
-                    >
-                        Enter
-                    </motion.h1>
-
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 3 }}
-                        className="p-3"
-                    >
-                        The void
-                    </motion.h1>
-
-                    <motion.h1
-                        initial={{ y: 100, opacity: 0 }}
-                        animate={{ y: 0, opacity: 1 }}
-                        transition={{ duration: 1, delay: 4 }}
-                        className="p-3"
-                    >
-                        of infinity
-                    </motion.h1>
+            <div className="overflow-y-scroll scrollbar-hide h-screen">
+                <div
+                    ref={containerRef}
+                    style={{
+                        width: '100vw',
+                        height: '100vh',
+                        overflow: 'hidden',
+                        position: 'relative',
+                        zIndex: 0
+                    }}
+                />
+                <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10 ">
+                    <div className="text-white text-8xl font-glitch">
+                        <motion.h1
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 1, delay: 2 }}
+                            className="p-3"
+                        >
+                            Enter
+                        </motion.h1>
+                        <motion.h1
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 1, delay: 3 }}
+                            className="p-3"
+                        >
+                            The void
+                        </motion.h1>
+                        <motion.h1
+                            initial={{ y: 100, opacity: 0 }}
+                            animate={{ y: 0, opacity: 1 }}
+                            transition={{ duration: 1, delay: 4 }}
+                            className="p-3"
+                        >
+                            of infinity
+                        </motion.h1>
+                    </div>
                 </div>
-
             </div>
         </>
     );

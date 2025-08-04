@@ -1,6 +1,6 @@
 // components/NextPrevButtons.jsx
 
-import { ArrowBigRightDash, ArrowBigLeftDash } from 'lucide-react'
+import { ChevronRight, ChevronLeft } from 'lucide-react'
 
 export default function NextPrevButtons({ onPrev, onNext }) {
   return (
@@ -10,7 +10,7 @@ export default function NextPrevButtons({ onPrev, onNext }) {
         className="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full shadow-lg transition-all duration-200"
         aria-label="Previous"
       >
-        <ArrowBigLeftDash size={28} strokeWidth={2.5} className="text-white" />
+        <ChevronLeft size={28} strokeWidth={2.5} className="text-white" />
       </button>
 
       <button
@@ -18,7 +18,7 @@ export default function NextPrevButtons({ onPrev, onNext }) {
         className="p-3 bg-white/10 hover:bg-white/20 backdrop-blur-md rounded-full shadow-lg transition-all duration-200"
         aria-label="Next"
       >
-        <ArrowBigRightDash size={28} strokeWidth={2.5} className="text-white" />
+        <ChevronRight size={28} strokeWidth={2.5} className="text-white" />
       </button>
     </div>
   );

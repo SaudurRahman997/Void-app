@@ -2,76 +2,74 @@
 import Background from "./background";
 import CardSlider from "./galaxyGallery";
 import Typewriter from "./typewriter";
-//import MilkywayFacts from "./facts/milkyway";
 import galaxyFacts from "./facts/galaxyfacts";
 import TopBanner from "./accessories/topbanner";
 import LeftFacts from "./facts/leftfacts";
 import RightFacts from "./facts/rightfacts";
+import ScrollTextSection from "./accessories/explore";
+
 export default function Galaxies() {
-
     return (
-        <>
+        <div className="overflow-x-hidden bg-black">
             <Background />
-            <div className="flex justify-center items-center bg-black ">
-                <Typewriter />
-            </div>
-            <div style={{ position: 'relative', zIndex: 1 }}>
-                <section style={{ height: '100vh' }}>
 
+
+
+            <div className="overflow-y-scroll scrollbar-hide h-screen" style={{ position: "relative", zIndex: 1 }}>
+                <div className="flex justify-center items-center">
+                    <Typewriter />
+                </div>
+                <section style={{ height: "100vh" }}>
                     <CardSlider />
-
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <ScrollTextSection text="Galaxies" />
+
+                <section id="a-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Milky Way" />
                     <LeftFacts fact={galaxyFacts.milkyWay} galaxy="milkyway" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="b-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Sombrero" />
                     <RightFacts fact={galaxyFacts.sombrero} galaxy="sombrero" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="c-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="UGC 87" />
                     <LeftFacts fact={galaxyFacts.ugc} galaxy="UGC" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="d-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Triangulum" />
                     <RightFacts fact={galaxyFacts.triangulum} galaxy="triangulum" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="e-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Andromeda" />
                     <LeftFacts fact={galaxyFacts.andromeda} galaxy="andromeda" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="f-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Centaurus A" />
                     <RightFacts fact={galaxyFacts.centaurus} galaxy="centaurus A" />
                 </section>
 
-
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="g-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Messier" />
                     <LeftFacts fact={galaxyFacts.messier} galaxy="messier" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="h-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Pinwheel" />
                     <RightFacts fact={galaxyFacts.pinwheel} galaxy="pinwheel" />
                 </section>
 
-                <section style={{ height: '100vh', padding: '2rem' }} >
+                <section id="i-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Whirlpool" />
                     <LeftFacts fact={galaxyFacts.whirlpool} galaxy="whirlpool" />
                 </section>
-
             </div>
-
-        </>
+        </div>
     );
 }
-
-

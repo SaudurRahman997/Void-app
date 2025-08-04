@@ -11,7 +11,7 @@ export default function Planets() {
         <>
             <Background />
 
-            <div style={{ position: 'relative', zIndex: 1 }}>
+            <div className="overflow-y-scroll scrollbar-hide h-screen" style={{ position: 'relative', zIndex: 1 }}>
                 <section style={{ height: '100vh' }} >
 
 

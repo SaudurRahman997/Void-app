@@ -25,3 +25,53 @@
     src: url('./assets/fonts/Neuropol_X.otf') format('opentype');
 
 }
+
+@font-face {
+    font-family: 'Noxis';
+    src: url('./assets/fonts/noxis.otf') format('opentype');
+
+}
+
+@font-face {
+    font-family: 'Siegra';
+    src: url('./assets/fonts/Siegra.ttf') format('opentype');
+
+}
+
+
+/* src/index.css or similar */
+/* src/index.css or equivalent */
+html,
+body {
+    overflow-x: hidden !important;
+    /* Force hide horizontal scrollbar */
+    overflow-y: auto;
+    /* Allow vertical scrolling */
+    width: 100vw;
+    /* Ensure full viewport width */
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    /* Prevent padding/margin from causing overflow */
+}
+
+/* Ensure all elements respect box-sizing */
+*,
+*:before,
+*:after {
+    box-sizing: inherit;
+}
+
+/* Target the ScrollTextSection container */
+.scroll-text-container {
+    overflow: hidden !important;
+    /* Prevent any overflow from text animation */
+    width: 100%;
+    /* Ensure it doesn’t exceed viewport */
+}
+
+/* Prevent overflow in all sections */
+section {
+    overflow-x: hidden !important;
+    width: 100%;
+}

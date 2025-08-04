@@ -29,9 +29,9 @@ const Planets9 = ({ trigger }) => {
         const venusTexture = loader.load('/textures/venus.jpg');
         const earthTexture = loader.load('/textures/earthh.jpg');
         const marsTexture = loader.load('/textures/mars.jpg');
-        const uranusTexture = loader.load('/textures/uranus.jpg');
-        const jupiterTexture = loader.load('/textures/jupiter.jpg');
-        const saturnTexture = loader.load('/textures/saturn.jpg');
+        const uranusTexture = loader.load('/textures/jupiter.jpg');
+        const jupiterTexture = loader.load('/textures/saturn.jpg');
+        const saturnTexture = loader.load('/textures/uranus.jpg');
 
         const neptuneTexture = loader.load('/textures/neptune.jpg');
 
@@ -51,6 +51,7 @@ const Planets9 = ({ trigger }) => {
         mercury.position.set(-8, 3, 1);
         mercury.scale.set(0.4, 0.4, 0.4);
         const mercuryLabel = createLabel("Mercury", mercury.position, "mercury-section");
+
         scene.add(mercuryLabel);
 
         scene.add(mercury);
@@ -118,7 +119,80 @@ const Planets9 = ({ trigger }) => {
         scene.add(neptuneLabel);
         scene.add(neptune);
 
+        // Animate position using GSAP
+        // Animate each label from behind (along z or y axis) into its actual position
 
+        gsap.fromTo(mercuryLabel.position,
+            { y: mercuryLabel.position.y - 2 },
+            {
+                y: mercuryLabel.position.y,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(venusLabel.position,
+            { z: venusLabel.position.z - 3 },
+            {
+                z: venusLabel.position.z,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(earthLabel.position,
+            { y: earthLabel.position.y - 2 },
+            {
+                y: earthLabel.position.y,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(marsLabel.position,
+            { z: marsLabel.position.z + 3 },
+            {
+                z: marsLabel.position.z,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(jupiterLabel.position,
+            { y: jupiterLabel.position.y + 2 },
+            {
+                y: jupiterLabel.position.y,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(saturnLabel.position,
+            { z: saturnLabel.position.z + 3 },
+            {
+                z: saturnLabel.position.z,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(uranusLabel.position,
+            { y: uranusLabel.position.y - 2 },
+            {
+                y: uranusLabel.position.y,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
+
+        gsap.fromTo(neptuneLabel.position,
+            { z: neptuneLabel.position.z - 3 },
+            {
+                z: neptuneLabel.position.z,
+                duration: 1.5,
+                ease: "power2.out",
+            }
+        );
 
         // Existing Three.js setup...
 
@@ -213,14 +287,14 @@ const Planets9 = ({ trigger }) => {
 
             // Rotate only the stars, not the planet
 
-            mercury.rotation.y += 0.005;
-            venus.rotation.y += 0.005;
-            earth.rotation.y += 0.005;
-            mars.rotation.y += 0.005;
-            uranus.rotation.y += 0.005;
-            jupiter.rotation.y += 0.005;
-            saturn.rotation.y += 0.005;
-            neptune.rotation.y += 0.005;
+            mercury.rotation.y += 0.05;    // Mercury: Fixed (fastest)
+            venus.rotation.y += 0.010;     // Venus: Fixed (slowest)
+            earth.rotation.y += 0.046;     // Earth: Scaled to ~0.997 days
+            mars.rotation.y += 0.046;      // Mars: Scaled to ~1.026 days
+            jupiter.rotation.y += 0.050;   // Jupiter: Scaled to ~0.4135 days (very close to Mercury)
+            saturn.rotation.y += 0.049;    // Saturn: Scaled to ~0.444 days
+            uranus.rotation.y += 0.047;    // Uranus: Scaled to ~0.718 days
+            neptune.rotation.y += 0.047;   // Neptune: Scaled to ~0.671 days
             renderer.render(scene, camera);
             requestAnimationFrame(animate);
         };

@@ -83,7 +83,7 @@ export default function LeftPlanetFacts({ fact, galaxy }) {
             </div>
 
             {/* Gallery (Now on the Right) */}
-            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl overflow-y-auto max-h-[650px]">
+            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl max-h-[650px] overflow-y-scroll scrollbar-thin scrollbar-thumb-yellow-300 scrollbar-track-gray-800">
                 <h2 className="text-xl font-semibold mb-4 font-orbitron">{galaxy} Gallery</h2>
                 <div className="grid grid-cols-2 gap-2 w-full">
                     {images.length > 0 ? (

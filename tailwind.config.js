@@ -8,7 +8,9 @@ export default {
         glitch: ['Beauty Glitch Demo', 'sans-serif'],
         orbitron: ['Orbitron Light', 'sans-serif'],
         neuropol: ['Neuropol', 'sans-serif'],
-        futura: ['Futura Rener', 'sans-serif']
+        futura: ['Futura Rener', 'sans-serif'],
+        noxis: ['Noxis', 'sans-serif'],
+        siegra: ['Siegra', 'sans-serif'],
       },
       animation: {
         'glow': 'glow 2s ease-in-out infinite',
@@ -33,7 +35,10 @@ export default {
 
 
 
-  plugins: [],
+  plugins: [
+    require('tailwind-scrollbar'),
+    require('tailwind-scrollbar-hide')
+  ],
 
 }
 

@@ -1,17 +1,37 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 
-export default function PinContainer({ imageUrl, title, href = "/" }) {
+export default function PinContainer({ imageUrl, title, href = "/", entryAnimation = {} }) {
     const [isHovered, setIsHovered] = useState(false);
 
     return (
-        <a
+        <motion.a
             href={href}
             target="_blank"
             rel="noopener noreferrer"
-            className="relative w-56 h-56 group" // square dimensions
+            className="relative w-56 h-56 group"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
+            initial={{
+                x: 0,
+                y: 0,
+                position: "absolute",
+                top: "50%",
+                left: "50%",
+                translateX: "-50%",
+                translateY: "-50%",
+                opacity: 0,
+            }}
+            animate={{
+                ...entryAnimation,
+                position: "static",
+                top: "auto",
+                left: "auto",
+                translateX: 4,
+                translateY: 4,
+                opacity: 1,
+            }}
+            transition={{ duration: 2, ease: "easeOut" }}
         >
             {/* Circular Card with image */}
             <motion.div
@@ -28,11 +48,11 @@ export default function PinContainer({ imageUrl, title, href = "/" }) {
                 />
             </motion.div>
 
-            {/* Glowing animated blue line (adjusted for circle) */}
+            {/* Glowing animated blue line */}
             {isHovered && (
                 <>
                     <motion.div
-                        initial={{ opacity: 0, scaleY: 0.5 }}
+                        initial={{ opacity: 0, scaleY: 1 }}
                         animate={{ opacity: 1, scaleY: 1 }}
                         exit={{ opacity: 0 }}
                         transition={{ duration: 0.5 }}
@@ -54,9 +74,9 @@ export default function PinContainer({ imageUrl, title, href = "/" }) {
                 transition={{ duration: 0.3 }}
             >
                 <div className="relative flex items-center space-x-2 z-10 rounded-full bg-black/70 py-1 px-4 ring-1 ring-white/10">
-                    <span className="text-white text-xs font-bold">{title}</span>
+                    <span className="text-white text-sm md:text-base font-glitch">{title}</span>
                 </div>
             </motion.div>
-        </a>
+        </motion.a>
     );
 }

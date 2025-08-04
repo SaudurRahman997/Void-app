@@ -41,8 +41,8 @@ export default function RightStarFacts({ fact, galaxy }) {
     return (
         <div className="flex w-full h-[600px] text-white p-14">
             {/* Image Gallery (Now on the Left) */}
-            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl overflow-y-auto max-h-[650px]">
-                <h2 className="text-xl font-semibold mb-4 font-orbitron">{galaxy} Gallery</h2>
+            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl max-h-[650px] overflow-y-scroll scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-800">
+                <h2 className="text-xl font-semibold mb-4 font-orbitron text-yellow-400">{galaxy} Gallery</h2>
                 <div className="grid grid-cols-2 gap-2 w-full">
                     {images.length > 0 ? (
                         images.map((url, index) => (
@@ -62,7 +62,7 @@ export default function RightStarFacts({ fact, galaxy }) {
             {/* Facts Box (Now on the Right) */}
             <div className="w-1/2 flex flex-col items-center">
                 <div className="w-full p-6 rounded-lg border-2 border-yellow-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)] transition-shadow duration-300">
-                    <h2 className="text-2xl font-orbitron mb-4 text-yellow-300">{galaxy} Facts</h2>
+                    <h2 className="text-2xl font-orbitron mb-4 text-yellow-400">{galaxy} Facts</h2>
                     <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
                         {facts.map((fact, idx) => (
                             <li key={idx} className="text-sm break-words">
