@@ -10,7 +10,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
     const maxUserFacts = 5;
     const userAddedFacts = facts.length - fact.length;
 
-    const handleAdd = () => {
+    const handleAdd = async () => {
         if (newFact.trim() === "") return;
 
         if (userAddedFacts >= maxUserFacts) {
@@ -18,10 +18,38 @@ export default function LeftStarFacts({ fact, galaxy }) {
             return;
         }
 
-        setFacts([...facts, newFact]);
-        setNewFact("");
-        setError("");
+        try {
+            const res = await fetch("http://localhost:5174/api/facts/stars", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({ galaxy, text: newFact }),
+            });
+
+            if (!res.ok) {
+                const errData = await res.json();
+                throw new Error(errData.message || "Failed to add fact");
+            }
+
+            const data = await res.json();
+            setFacts([...facts, { _id: data._id, text: data.text, isDefault: false }]);
+
+            setNewFact("");
+            setError("");
+        } catch (err) {
+            console.error("Error adding fact:", err);
+            setError(err.message || "An error occurred while adding the fact.");
+        }
     };
+
+    const handleDelete = async (id) => {
+        try {
+            await fetch(`http://localhost:5174/api/facts/stars/${id}`, { method: "DELETE" });
+            setFacts(facts.filter(f => f._id !== id)); // remove locally
+        } catch (err) {
+            console.error("Error deleting fact:", err);
+        }
+    };
+
 
     useEffect(() => {
         if (!galaxy || galaxy.trim().length < 3) return;
@@ -38,20 +66,47 @@ export default function LeftStarFacts({ fact, galaxy }) {
             .catch((err) => console.error("NASA API error:", err));
     }, [galaxy]);
 
+    useEffect(() => {
+        if (!galaxy || galaxy.trim().length < 3) return;
+
+        fetch(`http://localhost:5174/api/facts/${galaxy}`)
+            .then(res => res.json())
+            .then(data => {
+                if (Array.isArray(data)) {
+                    setFacts(data);
+                } else {
+                    console.error("Unexpected response:", data);
+                }
+            })
+            .catch(err => {
+                console.error("Error fetching facts:", err);
+                setError("Failed to load facts from server.");
+            });
+    }, [galaxy]);
+
     return (
-        <div className="flex w-full h-[600px] text-white p-14">
-            {/* Facts Box */}
-            <div className="w-1/2 flex flex-col items-center">
-                {/* Facts Box with Yellow Glow */}
+        <div className="flex flex-col lg:flex-row w-full min-h-[600px] text-white p-4 sm:p-10 lg:p-14 gap-8">
+
+            {/* Facts Section (top on mobile, left on desktop) */}
+            <div className="w-full lg:w-1/2 flex flex-col items-center h-full">
                 <div className="w-full p-6 rounded-lg border-2 border-yellow-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)] transition-shadow duration-300">
                     <h2 className="text-2xl font-orbitron mb-4 text-yellow-400">{galaxy} Facts</h2>
                     <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
                         {facts.map((fact, idx) => (
-                            <li key={idx} className="text-sm break-words">
-                                {idx + 1}. {fact}
+                            <li key={fact._id || idx} className="text-sm break-words flex items-center justify-between">
+                                <span>{idx + 1}. {fact.text}</span>
+                                {!fact.isDefault && (
+                                    <button
+                                        onClick={() => handleDelete(fact._id)}
+                                        className="ml-2 text-red-500 hover:text-red-700"
+                                    >
+                                        🗑
+                                    </button>
+                                )}
                             </li>
                         ))}
                     </ul>
+
                     <div className="flex gap-2">
                         <input
                             type="text"
@@ -72,22 +127,19 @@ export default function LeftStarFacts({ fact, galaxy }) {
                             +
                         </button>
                     </div>
+                    {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                 </div>
 
-                {/* Centered Button BELOW facts box */}
+                {/* Article Button */}
                 <div className="mt-6">
-                    <CustomButton href="https://example.com">
-                        Article
-                    </CustomButton>
+                    <CustomButton href="https://example.com">Article</CustomButton>
                 </div>
             </div>
 
-
-
-            {/* Image Gallery */}
-            <div className="w-1/2 p-4 m-4 bg-white/10 backdrop-blur-md rounded-xl  max-h-[650px] overflow-y-scroll scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-gray-800">
+            {/* Gallery Section (bottom on mobile, right on desktop) */}
+            <div className="w-full lg:w-1/2 max-h-[470px]  p-4 bg-white/10 backdrop-blur-md rounded-xl overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-800">
                 <h2 className="text-xl font-semibold mb-4 font-orbitron text-yellow-400">{galaxy} Gallery</h2>
-                <div className="grid grid-cols-2 gap-2 w-full">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
                     {images.length > 0 ? (
                         images.map((url, index) => (
                             <img

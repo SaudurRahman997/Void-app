@@ -12,52 +12,59 @@ import LeftStarFacts from "./facts/starsleftfacts";
 import RightStarFacts from "./facts/starsrightfacts";
 import starFacts from "./facts/starsfacts";
 import ScrollTextSection from "./accessories/explore";
+import useBreakpoint from "./accessories/isMobile";
 export default function Stars() {
+    const breakpoint = useBreakpoint();
 
+    const mobileAnimation = { x: 0, y: 40 };
+    const tabletAnimation = [
+        { x: -20, y: 20 },
+        { x: 20, y: 20 },
+        { x: -20, y: 20 },
+        { x: 20, y: 20 },
+        { x: -20, y: 20 },
+        { x: 20, y: 20 },
+    ];
+    const desktopAnimation = [
+        { x: -40, y: -40 },
+        { x: 0, y: -40 },
+        { x: 40, y: -40 },
+        { x: -40, y: 40 },
+        { x: 0, y: 40 },
+        { x: 40, y: 40 },
+    ];
+
+    const stars = [
+        { image: arcTexture, title: "Explore Arcturus", href: "https://en.wikipedia.org/wiki/Arcturus" },
+        { image: betelTexture, title: "Explore Betelgeuse", href: "https://en.wikipedia.org/wiki/Betelgeuse" },
+        { image: ZetaTexture, title: "Explore Zeta", href: "https://en.wikipedia.org/wiki/Zeta" },
+        { image: sunTexture, title: "Explore Sun", href: "https://en.wikipedia.org/wiki/Sun" },
+        { image: siriusTexture, title: "Explore Sirius", href: "https://en.wikipedia.org/wiki/Sirius" },
+        { image: rigelTexture, title: "Explore Rigel", href: "https://en.wikipedia.org/wiki/Rigel" },
+    ];
 
     return (
         <>
             <Background />
             <div className="overflow-y-scroll scrollbar-hide h-screen" >
                 <div className="min-h-screen bg-black pt-32 px-16  ">
-                    <div className="grid grid-cols-3 gap-x-16 gap-y-24 justify-items-center">
-                        <PinContainer
-                            imageUrl={arcTexture}
-                            title="Explore Arcturus"
-                            href="https://en.wikipedia.org/wiki/Arcturus"
-                            entryAnimation={{ x: -40, y: -40 }}
-                        />
-                        <PinContainer
-                            imageUrl={betelTexture}
-                            title="Explore Betelgeuse"
-                            href="https://en.wikipedia.org/wiki/Betelgeuse"
-                            entryAnimation={{ x: 0, y: -40 }}
-                        />
-                        <PinContainer
-                            imageUrl={ZetaTexture}
-                            title="Explore Zeta"
-                            href="https://en.wikipedia.org/wiki/Zeta"
-                            entryAnimation={{ x: 40, y: -40 }}
-                        />
-                        <PinContainer
-                            imageUrl={sunTexture}
-                            title="Explore Sun"
-                            href="https://en.wikipedia.org/wiki/Sun"
-                            entryAnimation={{ x: -40, y: 40 }}
-                        />
-                        <PinContainer
-                            imageUrl={siriusTexture}
-                            title="Explore Sirius"
-                            href="https://en.wikipedia.org/wiki/Sirius"
-                            entryAnimation={{ x: 0, y: 40 }}
-                        />
-                        <PinContainer
-                            imageUrl={rigelTexture}
-                            title="Explore Rigel"
-                            href="https://en.wikipedia.org/wiki/Rigel"
-                            entryAnimation={{ x: 40, y: 40 }}
-                        />
+                    <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-8 gap-y-12 justify-items-center">
+                        {stars.map((star, index) => {
+                            let animation;
+                            if (breakpoint === "mobile") animation = mobileAnimation;
+                            else if (breakpoint === "tablet") animation = tabletAnimation[index];
+                            else animation = desktopAnimation[index];
 
+                            return (
+                                <PinContainer
+                                    key={star.title}
+                                    imageUrl={star.image}
+                                    title={star.title}
+                                    href={star.href}
+                                    entryAnimation={animation}
+                                />
+                            );
+                        })}
                     </div>
                 </div>
 
@@ -66,45 +73,63 @@ export default function Stars() {
 
                 <div style={{ position: 'relative', zIndex: 1 }}>
 
-                    <section style={{ height: '100vh' }}>
+                    {/* <section style={{ height: '100vh' }}>
 
 
 
-                    </section>
+                    </section> */}
 
-                    <section style={{ height: '100vh' }}>
-
+                    <section
+                        id="O-section"
+                        className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                    >
                         <LeftStarFacts fact={starFacts.O_type} galaxy="O Type" />
+                    </section>
+
+
+
+                    <section
+                        id="A-section"
+                        className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                    >
+
+                        <LeftStarFacts fact={starFacts.A_type} galaxy="A Type" />
 
                     </section>
 
-                    <section style={{ height: '100vh' }}>
-
-                        <RightStarFacts fact={starFacts.A_type} galaxy="A Type" />
-
-                    </section>
-
-                    <section style={{ height: '100vh' }}>
+                    <section
+                        id="B-section"
+                        className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                    >
 
                         <LeftStarFacts fact={starFacts.B_type} galaxy="B Type" />
 
                     </section>
 
-                    <section style={{ height: '100vh' }}>
+                    <section
+                        id="G-section"
+                        className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                    >
 
-                        <RightStarFacts fact={starFacts.G_type} galaxy="G Type" />
+                        <LeftStarFacts fact={starFacts.G_type} galaxy="G Type" />
 
                     </section>
 
-                    <section style={{ height: '100vh' }}>
+                    <section
+                        id="M-section"
+                        className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                    >
 
                         <LeftStarFacts fact={starFacts.M_type} galaxy="M Type" />
 
                     </section>
 
-                    <section style={{ height: '100vh' }}>
+                    <section
+                        id="K-section"
+                        className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                    >
 
-                        <RightStarFacts fact={starFacts.K_type} galaxy="K Type" />
+                        <LeftStarFacts fact={starFacts.K_type} galaxy="K Type" />
 
                     </section>
 

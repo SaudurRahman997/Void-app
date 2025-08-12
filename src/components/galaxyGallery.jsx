@@ -21,7 +21,8 @@ export default function CardSlider() {
   const handlePrev = () => setIndex((prev) => (prev - 1 + cards.length) % cards.length);
 
   return (
-    <div className="relative w-full flex justify-center items-center overflow-hidden h-screen ">
+    <div className="relative w-full flex justify-center items-center overflow-hidden h-screen pt-20 lg:pt-0">
+
       {/* Slide Cards */}
       <div className="flex items-center justify-center gap-4 relative w-full">
         {

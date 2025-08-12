@@ -15,7 +15,7 @@ export default function GalaxyCard({ image, title, targetId }) {
     return (
         <motion.div
             onClick={handleClick}
-            className="relative w-64 rounded-2xl overflow-hidden shadow-xl group cursor-pointer"
+            className="relative w-52 lg:w-64 rounded-2xl overflow-hidden shadow-xl group cursor-pointer"
             whileHover={{
                 rotateX: 5,
                 rotateY: -5,
@@ -34,7 +34,7 @@ export default function GalaxyCard({ image, title, targetId }) {
 
             {/* Image + Title Content */}
             <div className="relative z-10 flex flex-col items-center">
-                <div className="h-56 w-full">
+                <div className="h-44 lg:h-56 w-full">
                     <img
                         src={image}
                         alt={title}
@@ -46,8 +46,8 @@ export default function GalaxyCard({ image, title, targetId }) {
                 </div>
 
                 {/* Title Section */}
-                <div className="w-full bg-white/10 backdrop-blur-md p-3 text-center font-glitch text-2xl text-white">
-                    <h2 className="text-base group-hover:text-blue-400 transition duration-300">
+                <div className="w-full bg-white/10 backdrop-blur-md p-3 text-center font-glitch text-xl lg:text-2xl text-white">
+                    <h2 className="text-sm lg:text-base group-hover:text-blue-400 transition duration-300">
                         {title}
                     </h2>
                 </div>

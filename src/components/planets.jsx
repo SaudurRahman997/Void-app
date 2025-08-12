@@ -7,50 +7,54 @@ import RightPlanetFacts from './facts/planetrightfacts';
 import LeftPlanetFacts from './facts/planetleftfacts';
 export default function Planets() {
     const mercuryTriggerRef = useRef(null);
+
+    const sectionHeight = window.innerWidth < 1024 ? '350vh' : '100vh';
+
     return (
         <>
             <Background />
 
             <div className="overflow-y-scroll scrollbar-hide h-screen" style={{ position: 'relative', zIndex: 1 }}>
-                <section style={{ height: '100vh' }} >
 
-
+                <section style={{ height: sectionHeight }}>
                     <Planets9 />
                 </section>
-
-                <section id="mercury-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <LeftPlanetFacts fact={planetFacts.Mercury} galaxy="Mercury" />
+                <section
+                    id="mercury-section"
+                    className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                >
+                    <LeftPlanetFacts galaxy="Mercury" />
                 </section>
 
-                <section id="venus-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <RightPlanetFacts fact={planetFacts.Venus} galaxy="Venus" />
+                <section
+                    id="venus-section"
+                    className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
+                >
+                    <LeftPlanetFacts galaxy="Venus" />
+                </section>
+                <section id="earth-section" className="min-h-screen px-4 py-8 sm:py-12 lg:py-16">
+                    <LeftPlanetFacts galaxy="Earth" />
                 </section>
 
-                <section id="earth-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <LeftPlanetFacts fact={planetFacts.Earth} galaxy="Earth" />
+                <section id="mars-section" className="min-h-screen px-4 py-8 sm:py-12 lg:py-16">
+                    <LeftPlanetFacts galaxy="Mars" />
                 </section>
 
-                <section id="mars-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <RightPlanetFacts fact={planetFacts.Mars} galaxy="Mars" />
+                <section id="jupiter-section" className="min-h-screen px-4 py-8 sm:py-12 lg:py-16">
+                    <LeftPlanetFacts galaxy="Jupiter" />
                 </section>
 
-                <section id="jupiter-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <LeftPlanetFacts fact={planetFacts.Jupiter} galaxy="Jupiter" />
+                <section id="saturn-section" className="min-h-screen px-4 py-8 sm:py-12 lg:py-16">
+                    <LeftPlanetFacts galaxy="Saturn" />
                 </section>
 
-                <section id="saturn-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <RightPlanetFacts fact={planetFacts.Saturn} galaxy="Saturn" />
+                <section id="uranus-section" className="min-h-screen px-4 py-8 sm:py-12 lg:py-16">
+                    <LeftPlanetFacts galaxy="Uranus" />
                 </section>
 
-                <section id="uranus-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <LeftPlanetFacts fact={planetFacts.Uranus} galaxy="Uranus" />
+                <section id="neptune-section" className="min-h-screen px-4 py-8 sm:py-12 lg:py-16">
+                    <LeftPlanetFacts galaxy="Neptune" />
                 </section>
-
-                <section id="neptune-section" style={{ height: '100vh', padding: '2rem' }} >
-                    <RightPlanetFacts fact={planetFacts.Neptune} galaxy="Neptune" />
-                </section>
-
-
 
 
 
