@@ -19,7 +19,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
         }
 
         try {
-            const res = await fetch("http://localhost:5174/api/facts/stars", {
+            const res = await fetch("https://void-backend.vercel.app/api/facts/stars", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ galaxy, text: newFact }),
@@ -43,7 +43,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
 
     const handleDelete = async (id) => {
         try {
-            await fetch(`http://localhost:5174/api/facts/stars/${id}`, { method: "DELETE" });
+            await fetch(`https://void-backend.vercel.app/api/facts/stars/${id}`, { method: "DELETE" });
             setFacts(facts.filter(f => f._id !== id)); // remove locally
         } catch (err) {
             console.error("Error deleting fact:", err);
@@ -69,7 +69,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
     useEffect(() => {
         if (!galaxy || galaxy.trim().length < 3) return;
 
-        fetch(`http://localhost:5174/api/facts/${galaxy}`)
+        fetch(`https://void-backend.vercel.app/api/facts/${galaxy}`)
             .then(res => res.json())
             .then(data => {
                 if (Array.isArray(data)) {

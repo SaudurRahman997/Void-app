@@ -12,7 +12,7 @@ export default function LeftPlanetFacts({ galaxy }) {
     // Fetch facts from backend
     useEffect(() => {
         if (!galaxy) return;
-        fetch(`http://localhost:5174/api/planets/${galaxy}`)
+        fetch(`https://void-backend.vercel.app/api/planets/${galaxy}`)
             .then(res => res.json())
             .then(data => {
                 console.log("Fetched facts from backend:", data);
@@ -48,7 +48,7 @@ export default function LeftPlanetFacts({ galaxy }) {
         }
 
         try {
-            const res = await fetch("http://localhost:5174/api/planets", {
+            const res = await fetch("https://void-backend.vercel.app/api/planets", {
                 method: "POST",
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify({ galaxy, text: newFact }) // stays in req.body
@@ -72,7 +72,7 @@ export default function LeftPlanetFacts({ galaxy }) {
     // Add this function inside your component
     const handleDelete = async (id) => {
         try {
-            const res = await fetch(`http://localhost:5174/api/planets/${id}`, {
+            const res = await fetch(`https://void-backend.vercel.app/api/planets/${id}`, {
                 method: "DELETE",
             });
 
