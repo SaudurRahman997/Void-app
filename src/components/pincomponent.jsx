@@ -4,12 +4,18 @@ import { motion } from "framer-motion";
 export default function PinContainer({ imageUrl, title, href = "/", entryAnimation = {} }) {
     const [isHovered, setIsHovered] = useState(false);
 
+    // Function to scroll to the section
+    const scrollToSection = (id) => {
+        const section = document.querySelector(id);
+        if (section) {
+            section.scrollIntoView({ behavior: "smooth" });
+        }
+    };
+
     return (
-        <motion.a
-            href={href}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="relative w-56 h-56 group"
+        <motion.div
+            onClick={() => scrollToSection(href)} // Scroll instead of opening link
+            className="relative w-56 h-56 group cursor-pointer"
             onMouseEnter={() => setIsHovered(true)}
             onMouseLeave={() => setIsHovered(false)}
             initial={{
@@ -77,6 +83,6 @@ export default function PinContainer({ imageUrl, title, href = "/", entryAnimati
                     <span className="text-white text-sm md:text-base font-glitch">{title}</span>
                 </div>
             </motion.div>
-        </motion.a>
+        </motion.div>
     );
 }

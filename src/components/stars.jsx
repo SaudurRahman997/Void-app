@@ -13,6 +13,7 @@ import RightStarFacts from "./facts/starsrightfacts";
 import starFacts from "./facts/starsfacts";
 import ScrollTextSection from "./accessories/explore";
 import useBreakpoint from "./accessories/isMobile";
+import TopBannerstar from "./accessories/topbannerstars";
 export default function Stars() {
     const breakpoint = useBreakpoint();
 
@@ -35,12 +36,12 @@ export default function Stars() {
     ];
 
     const stars = [
-        { image: arcTexture, title: "Explore Arcturus", href: "https://en.wikipedia.org/wiki/Arcturus" },
-        { image: betelTexture, title: "Explore Betelgeuse", href: "https://en.wikipedia.org/wiki/Betelgeuse" },
-        { image: ZetaTexture, title: "Explore Zeta", href: "https://en.wikipedia.org/wiki/Zeta" },
-        { image: sunTexture, title: "Explore Sun", href: "https://en.wikipedia.org/wiki/Sun" },
-        { image: siriusTexture, title: "Explore Sirius", href: "https://en.wikipedia.org/wiki/Sirius" },
-        { image: rigelTexture, title: "Explore Rigel", href: "https://en.wikipedia.org/wiki/Rigel" },
+        { image: arcTexture, title: "Explore Arcturus", href: "#K-section" },
+        { image: betelTexture, title: "Explore Betelgeuse", href: "#M-section" },
+        { image: ZetaTexture, title: "Explore Zeta", href: "#B-section" },
+        { image: sunTexture, title: "Explore Sun", href: "#G-section" },
+        { image: siriusTexture, title: "Explore Sirius", href: "#A-section" },
+        { image: rigelTexture, title: "Explore Rigel", href: "#O-section" },
     ];
 
     return (
@@ -73,16 +74,13 @@ export default function Stars() {
 
                 <div style={{ position: 'relative', zIndex: 1 }}>
 
-                    {/* <section style={{ height: '100vh' }}>
 
-
-
-                    </section> */}
-
+                    <ScrollTextSection text="Stars" />
                     <section
                         id="O-section"
                         className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
                     >
+                        <TopBannerstar text="O Type" />
                         <LeftStarFacts fact={starFacts.O_type} galaxy="O Type" />
                     </section>
 
@@ -92,7 +90,7 @@ export default function Stars() {
                         id="A-section"
                         className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
                     >
-
+                        <TopBannerstar text="A Type" />
                         <LeftStarFacts fact={starFacts.A_type} galaxy="A Type" />
 
                     </section>
@@ -101,7 +99,7 @@ export default function Stars() {
                         id="B-section"
                         className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
                     >
-
+                        <TopBannerstar text="B Type" />
                         <LeftStarFacts fact={starFacts.B_type} galaxy="B Type" />
 
                     </section>
@@ -110,7 +108,7 @@ export default function Stars() {
                         id="G-section"
                         className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
                     >
-
+                        <TopBannerstar text="G Type" />
                         <LeftStarFacts fact={starFacts.G_type} galaxy="G Type" />
 
                     </section>
@@ -120,6 +118,7 @@ export default function Stars() {
                         className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
                     >
 
+                        <TopBannerstar text="M Type" />
                         <LeftStarFacts fact={starFacts.M_type} galaxy="M Type" />
 
                     </section>
@@ -128,7 +127,7 @@ export default function Stars() {
                         id="K-section"
                         className="min-h-screen px-4 py-8 sm:py-12 lg:py-16"
                     >
-
+                        <TopBannerstar text="K Type" />
                         <LeftStarFacts fact={starFacts.K_type} galaxy="K Type" />
 
                     </section>

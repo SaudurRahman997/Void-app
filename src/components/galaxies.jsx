@@ -32,7 +32,7 @@ export default function Galaxies() {
 
                 <section id="b-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Sombrero" />
-                    <RightFacts fact={galaxyFacts.sombrero} galaxy="sombrero" />
+                    <LeftFacts fact={galaxyFacts.sombrero} galaxy="sombrero" />
                 </section>
 
                 <section id="c-section" className="min-h-screen px-8 pt-24">
@@ -42,7 +42,7 @@ export default function Galaxies() {
 
                 <section id="d-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Triangulum" />
-                    <RightFacts fact={galaxyFacts.triangulum} galaxy="triangulum" />
+                    <LeftFacts fact={galaxyFacts.triangulum} galaxy="triangulum" />
                 </section>
 
                 <section id="e-section" className="min-h-screen px-8 pt-24">
@@ -52,7 +52,7 @@ export default function Galaxies() {
 
                 <section id="f-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Centaurus A" />
-                    <RightFacts fact={galaxyFacts.centaurus} galaxy="centaurus A" />
+                    <LeftFacts fact={galaxyFacts.centaurus} galaxy="centaurus_A" />
                 </section>
 
                 <section id="g-section" className="min-h-screen px-8 pt-24">
@@ -62,7 +62,7 @@ export default function Galaxies() {
 
                 <section id="h-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Pinwheel" />
-                    <RightFacts fact={galaxyFacts.pinwheel} galaxy="pinwheel" />
+                    <LeftFacts fact={galaxyFacts.pinwheel} galaxy="pinwheel" />
                 </section>
 
                 <section id="i-section" className="min-h-screen px-8 pt-24">

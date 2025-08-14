@@ -1,4 +1,4 @@
-import { useEffect, useRef } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
 import gsap from 'gsap';
@@ -7,10 +7,18 @@ import { motion } from "framer-motion";
 const EarthScene = () => {
     const containerRef = useRef(null);
     const rendererRef = useRef();
+    const [smallScreen, setSmallScreen] = useState(window.innerWidth < 1024);
 
-
+    // 📏 Function to check size
     const isSmall = () => window.innerWidth < 1024;
 
+    // 📏 Update smallScreen state on resize
+    useEffect(() => {
+        const handleResizeCheck = () => setSmallScreen(isSmall());
+        handleResizeCheck();
+        window.addEventListener('resize', handleResizeCheck);
+        return () => window.removeEventListener('resize', handleResizeCheck);
+    }, []);
 
     // 📏 Fix mobile 100vh issue
     useEffect(() => {
@@ -170,52 +178,48 @@ const EarthScene = () => {
     }, []);
 
     return (
-        <>
-            <div className="overflow-hidden h-screen w-screen">
-                <div
-                    ref={containerRef}
-                    style={{
-                        position: 'fixed',
-                        top: 0,
-                        left: 0,
-                        width: '100%',
-                        height: 'calc(var(--vh) * 100)',
-                        overflow: 'hidden',
-                        zIndex: 0
-                    }}
-                />
-                <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10">
-                    {/* 📏 Text scales down for screens < 1024px */}
-                    <div className={`text-white font-glitch ${isSmall ? 'text-6xl' : 'text-8xl'
-                        }`}>
-                        <motion.h1
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 1, delay: 2 }}
-                            className="p-3"
-                        >
-                            Enter
-                        </motion.h1>
-                        <motion.h1
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 1, delay: 3 }}
-                            className="p-3"
-                        >
-                            The void
-                        </motion.h1>
-                        <motion.h1
-                            initial={{ y: 100, opacity: 0 }}
-                            animate={{ y: 0, opacity: 1 }}
-                            transition={{ duration: 1, delay: 4 }}
-                            className="p-3"
-                        >
-                            of infinity
-                        </motion.h1>
-                    </div>
+        <div className="overflow-hidden h-screen w-screen">
+            <div
+                ref={containerRef}
+                style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    width: '100%',
+                    height: 'calc(var(--vh) * 100)',
+                    overflow: 'hidden',
+                    zIndex: 0
+                }}
+            />
+            <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10">
+                <div className={`text-white font-glitch ${smallScreen ? 'text-6xl' : 'text-8xl'}`}>
+                    <motion.h1
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 1, delay: 2 }}
+                        className="p-3"
+                    >
+                        Enter
+                    </motion.h1>
+                    <motion.h1
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 1, delay: 3 }}
+                        className="p-3"
+                    >
+                        The void
+                    </motion.h1>
+                    <motion.h1
+                        initial={{ y: 100, opacity: 0 }}
+                        animate={{ y: 0, opacity: 1 }}
+                        transition={{ duration: 1, delay: 4 }}
+                        className="p-3"
+                    >
+                        of infinity
+                    </motion.h1>
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 
