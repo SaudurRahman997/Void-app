@@ -10,7 +10,7 @@ import TopBannerplanet from "./accessories/topbannerplanets";
 export default function Planets() {
     const mercuryTriggerRef = useRef(null);
 
-    const sectionHeight = window.innerWidth < 1024 ? '350vh' : '100vh';
+    //const sectionHeight = window.innerWidth < 1024 ? '100vh' : '100vh';
 
     return (
         <>
@@ -18,7 +18,7 @@ export default function Planets() {
 
             <div className="overflow-y-scroll scrollbar-hide h-screen" style={{ position: 'relative', zIndex: 1 }}>
 
-                <section style={{ height: sectionHeight }}>
+                <section style={{ height: '100vh' }}>
                     <Planets9 />
                 </section>
 

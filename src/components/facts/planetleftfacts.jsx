@@ -1,11 +1,72 @@
 import { useState, useEffect } from "react";
 import CustomButton from "../accessories/articlebutton";
 
+
+
+
 export default function LeftPlanetFacts({ galaxy }) {
     const [facts, setFacts] = useState([]);
     const [newFact, setNewFact] = useState("");
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
+
+    const planetImages = {
+        mercury: [
+            "./textures/mercury1.jpeg",
+            "./textures/mercury2.jpeg",
+            "./textures/mercury3.jpeg",
+            "./textures/mercury4.jpeg",
+        ],
+        venus: [
+            "./textures/venus1.jpeg",
+            "./textures/venus2.jpeg",
+            "./textures/venus3.jpeg",
+            "./textures/venus4.jpeg",
+        ],
+        earth: [
+            "./textures/earth1.jpeg",
+            "./textures/earth2.jpeg",
+            "./textures/earth3.jpeg",
+            "./textures/earth4.jpeg",
+        ],
+        mars: [
+            "./textures/mars1.jpeg",
+            "./textures/mars2.jpeg",
+            "./textures/mars3.jpeg",
+            "./textures/mars4.jpeg",
+        ],
+        jupiter: [
+            "./textures/jupiter1.jpeg",
+            "./textures/jupiter2.jpeg",
+            "./textures/jupiter3.jpeg",
+            "./textures/jupiter4.jpeg",
+        ],
+        saturn: [
+            "./textures/saturn1.jpeg",
+            "./textures/saturn2.jpeg",
+            "./textures/saturn3.jpeg",
+            "./textures/saturn4.jpeg",
+        ],
+        uranus: [
+            "./textures/uranus1.jpeg",
+            "./textures/uranus2.jpeg",
+            "./textures/uranus3.jpeg",
+            "./textures/uranus4.jpeg",
+        ],
+        neptune: [
+            "./textures/neptune1.jpeg",
+            "./textures/neptune2.jpeg",
+            "./textures/neptune3.jpeg",
+            "./textures/neptune4.jpeg",
+        ],
+        pluto: [ // optional
+            "./textures/pluto1.jpeg",
+            "./textures/pluto2.jpeg",
+            "./textures/pluto3.jpeg",
+            "./textures/pluto4.jpeg",
+        ],
+    };
+
 
     const maxUserFacts = 5;
 
@@ -24,18 +85,11 @@ export default function LeftPlanetFacts({ galaxy }) {
 
     // Fetch NASA images
     useEffect(() => {
-        if (!galaxy || galaxy.trim().length < 3) return;
-        fetch(`https://images-api.nasa.gov/search?q=${galaxy}&media_type=image`)
-            .then((res) => res.json())
-            .then((data) => {
-                const items = data.collection?.items?.slice(0, 10) || [];
-                const imageUrls = items
-                    .map((item) => item.links?.[0]?.href)
-                    .filter(Boolean);
-                setImages(imageUrls);
-            })
-            .catch((err) => console.error("NASA API error:", err));
+        if (!galaxy) return;
+        const key = galaxy.toLowerCase(); // make sure keys match your object
+        setImages(planetImages[key] || []);
     }, [galaxy]);
+
 
     // ✅ Updated handleAdd
     const handleAdd = async () => {
@@ -95,8 +149,8 @@ export default function LeftPlanetFacts({ galaxy }) {
         <div className="flex flex-col lg:flex-row w-full h-auto min-h-[600px] text-white p-4 lg:p-14 space-y-6 lg:space-y-0 lg:space-x-6">
             {/* Facts Box */}
             <div className="w-full lg:w-1/2 flex flex-col items-center">
-                <div className="w-full p-6 rounded-lg border-2 border-yellow-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)]">
-                    <h2 className="text-2xl font-orbitron mb-4 text-yellow-300">{galaxy} Facts</h2>
+                <div className="w-full p-6 rounded-lg border-2 border-purple-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)]">
+                    <h2 className="text-2xl font-orbitron mb-4 text-purple-300">{galaxy} Facts</h2>
                     <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
                         {facts.map((fact, idx) => (
                             <li
@@ -131,7 +185,7 @@ export default function LeftPlanetFacts({ galaxy }) {
                             disabled={facts.length >= 15}
                             className={`px-4 py-2 rounded text-white flex-shrink-0 ${facts.length >= 15
                                 ? "bg-gray-500 cursor-not-allowed"
-                                : "bg-blue-500 hover:bg-blue-600"
+                                : "bg-purple-500 hover:bg-purple-700"
                                 }`}
                         >
                             +
@@ -141,13 +195,13 @@ export default function LeftPlanetFacts({ galaxy }) {
                     {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                 </div>
                 <div className="mt-6">
-                    <CustomButton href="https://example.com">Article</CustomButton>
+                    <CustomButton href="https://en.wikipedia.org/wiki/Mercury_(planet)">Article</CustomButton>
                 </div>
             </div>
 
             {/* Gallery */}
             <div className="w-full lg:w-1/2 p-4 bg-white/10 backdrop-blur-md rounded-xl max-h-[470px] overflow-y-scroll scrollbar-thin scrollbar-thumb-yellow-300 scrollbar-track-gray-800">
-                <h2 className="text-xl font-semibold mb-4 font-orbitron">{galaxy} Gallery</h2>
+                <h2 className="text-xl font-semibold mb-4 font-orbitron text-purple-400">{galaxy} Gallery</h2>
                 <div className="grid grid-cols-2 gap-2 w-full">
                     {images.length > 0 ? (
                         images.map((url, index) => (

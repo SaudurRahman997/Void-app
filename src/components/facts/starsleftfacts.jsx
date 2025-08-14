@@ -7,6 +7,37 @@ export default function LeftStarFacts({ fact, galaxy }) {
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
 
+    const starImages = {
+        k: [
+            "/images/k1.jpeg",
+            "/images/k2.jpeg"
+        ],
+        m: [
+            "/images/m1.jpeg",
+            "/images/m2.jpeg"
+        ],
+        g: [
+            "/images/g1.jpeg",
+            "/images/g2.jpeg"
+        ],
+        f: [
+            "/images/f1.jpeg",
+            "/images/f2.jpeg"
+        ],
+        a: [
+            "/images/a1.jpeg",
+            "/images/a2.jpeg"
+        ],
+        b: [
+            "/images/b1.jpeg",
+            "/images/b2.jpeg"
+        ],
+        o: [
+            "/images/o1.jpeg",
+            "/images/o2.jpeg"
+        ]
+    };
+
     const maxUserFacts = 5;
     const userAddedFacts = facts.length - fact.length;
 

@@ -84,7 +84,7 @@ export default function FiveTextBoxes() {
                 gap: "40px",
                 padding: "50px",
                 alignItems: "center",
-                marginTop: width > 1024 ? "1000px" : "1500px", // smaller margin on mobile
+                marginTop: width > 1024 ? "1000px" : "2000px", // smaller margin on mobile
 
             }}
         >
