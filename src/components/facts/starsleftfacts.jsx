@@ -107,26 +107,27 @@ export default function LeftStarFacts({ fact, galaxy }) {
                         ))}
                     </ul>
 
-                    <div className="flex gap-2">
+                    <div className="flex flex-col sm:flex-row gap-2 w-full">
                         <input
                             type="text"
                             placeholder="Add your own fact..."
                             value={newFact}
                             onChange={(e) => setNewFact(e.target.value)}
-                            className="flex-1 p-2 rounded bg-white/20 backdrop-blur-md placeholder-white text-white"
+                            className="flex-1 w-full sm:flex-auto p-2 rounded bg-white/20 backdrop-blur-md placeholder-white text-white min-w-0"
                             disabled={facts.length >= 15}
                         />
                         <button
                             onClick={handleAdd}
                             disabled={facts.length >= 15}
-                            className={`px-4 py-2 rounded text-white ${facts.length >= 15
+                            className={`px-4 py-2 rounded text-white flex-shrink-0 ${facts.length >= 15
                                 ? "bg-gray-500 cursor-not-allowed"
-                                : "bg-blue-500 hover:bg-blue-600"
+                                : "bg-yellow-500 hover:bg-yellow-700"
                                 }`}
                         >
                             +
                         </button>
                     </div>
+
                     {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                 </div>
 
