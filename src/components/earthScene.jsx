@@ -8,7 +8,22 @@ const EarthScene = () => {
     const containerRef = useRef(null);
     const rendererRef = useRef();
 
+
+    const isSmall = () => window.innerWidth < 1024;
+
+
+    // 📏 Fix mobile 100vh issue
     useEffect(() => {
+        const setVh = () => {
+            document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
+        };
+        setVh();
+        window.addEventListener('resize', setVh);
+        return () => window.removeEventListener('resize', setVh);
+    }, []);
+
+    useEffect(() => {
+        document.body.style.overflow = 'hidden'; // 🚫 Prevent scrolling
         const container = containerRef.current;
         if (!container) return;
 
@@ -20,7 +35,7 @@ const EarthScene = () => {
         const loader = new THREE.TextureLoader();
         const earthTexture = loader.load('/textures/earthh.jpg');
         const sunTexture = loader.load('/textures/moon.jpg');
-        scene.background = new THREE.Color(0x000000); // black
+        scene.background = new THREE.Color(0x000000);
 
         const geometry = new THREE.SphereGeometry(3, 64, 64);
         const geometry1 = new THREE.SphereGeometry(3, 64, 64);
@@ -33,20 +48,14 @@ const EarthScene = () => {
 
         const material = new THREE.MeshStandardMaterial({ map: earthTexture });
         const earth = new THREE.Mesh(geometry, material);
-        earth.rotation.y = Math.PI * 2 / 3; // rotate 90 degrees
+        earth.rotation.y = Math.PI * 2 / 3;
 
         earth.position.set(0, -50, -20);
 
-        // 🌐 Responsive Earth scale
-        let earthScale = 2;
-        if (window.innerWidth < 768) {
-            earthScale = 1.2; // Smaller for mobile
-        }
+        let earthScale = window.innerWidth < 768 ? 1.2 : 2;
         earth.scale.set(earthScale, earthScale, earthScale);
-
         scene.add(earth);
 
-        // ✅ Animate into place using GSAP
         gsap.to(earth.position, {
             duration: 1,
             x: 6,
@@ -56,7 +65,6 @@ const EarthScene = () => {
             delay: 0.5
         });
 
-        // ✨ Star Field
         const starGeometry = new THREE.BufferGeometry();
         const starCount = 10000;
         const starPositions = new Float32Array(starCount * 3);
@@ -99,7 +107,6 @@ const EarthScene = () => {
         const stars = new THREE.Points(starGeometry, starMaterial);
         scene.add(stars);
 
-        // ☀️ Lighting
         const sunlight = new THREE.DirectionalLight(0xfff5c0, 2);
         sunlight.position.set(10, 10, 5);
         scene.add(sunlight);
@@ -131,7 +138,6 @@ const EarthScene = () => {
             camera.updateProjectionMatrix();
             renderer.setSize(width, height);
 
-            // 📱 Adjust earth scale on resize
             if (window.innerWidth < 768) {
                 earth.scale.set(1.2, 1.2, 1.2);
             } else {
@@ -159,24 +165,29 @@ const EarthScene = () => {
                     container.removeChild(rendererRef.current.domElement);
                 }
             }
+            document.body.style.overflow = ''; // restore scrolling
         };
     }, []);
 
     return (
         <>
-            <div className="overflow-y-scroll scrollbar-hide h-screen">
+            <div className="overflow-hidden h-screen w-screen">
                 <div
                     ref={containerRef}
                     style={{
-                        width: '100vw',
-                        height: '100vh',
+                        position: 'fixed',
+                        top: 0,
+                        left: 0,
+                        width: '100%',
+                        height: 'calc(var(--vh) * 100)',
                         overflow: 'hidden',
-                        position: 'relative',
                         zIndex: 0
                     }}
                 />
-                <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10 ">
-                    <div className="text-white text-8xl font-glitch">
+                <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10">
+                    {/* 📏 Text scales down for screens < 1024px */}
+                    <div className={`text-white font-glitch ${isSmall ? 'text-6xl' : 'text-8xl'
+                        }`}>
                         <motion.h1
                             initial={{ y: 100, opacity: 0 }}
                             animate={{ y: 0, opacity: 1 }}
