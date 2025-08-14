@@ -192,7 +192,7 @@ const EarthScene = () => {
                 }}
             />
             <div className="absolute top-[60%] left-10 transform -translate-y-1/2 z-10">
-                <div className={`text-white font-glitch ${smallScreen ? 'text-6xl' : 'text-8xl'}`}>
+                <div className={`text-white font-glitch ${smallScreen ? 'text-4xl' : 'text-8xl'}`}>
                     <motion.h1
                         initial={{ y: 100, opacity: 0 }}
                         animate={{ y: 0, opacity: 1 }}
