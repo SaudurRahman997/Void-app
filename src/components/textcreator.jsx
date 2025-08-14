@@ -17,7 +17,7 @@ export default function FiveTextBoxes() {
 
     const commonStyle = {
         minHeight: "150px",
-        width: window.innerWidth > 1024 ? "1000px" : "400px", // responsive width
+        width: window.innerWidth > 1024 ? "1000px" : "300px", // responsive width
         border: "2px solid white",
         outline: "none",
         borderRadius: "12px",
