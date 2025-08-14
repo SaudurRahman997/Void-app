@@ -6,7 +6,7 @@ import planetFacts from './facts/planetfacts';
 import RightPlanetFacts from './facts/planetrightfacts';
 import LeftPlanetFacts from './facts/planetleftfacts';
 import ScrollTextSection from "./accessories/explore";
-import TopBannerplanet from "./accessories/topbannerstars";
+import TopBannerplanet from "./accessories/topbannerplanets";
 export default function Planets() {
     const mercuryTriggerRef = useRef(null);
 

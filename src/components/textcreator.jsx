@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
-import TopBanner from "./accessories/topbanner";
+import TopBannercreator from "./accessories/topbannercreator";
+
 
 export default function FiveTextBoxes() {
     const boxRefs = useRef([]);
@@ -16,7 +17,7 @@ export default function FiveTextBoxes() {
 
     const commonStyle = {
         minHeight: "150px",
-        width: window.innerWidth > 1024 ? "800px" : "400px", // responsive width
+        width: window.innerWidth > 1024 ? "1000px" : "400px", // responsive width
         border: "2px solid white",
         outline: "none",
         borderRadius: "12px",
@@ -37,8 +38,8 @@ export default function FiveTextBoxes() {
         border: "2px solid white",
         backgroundColor: "transparent",
         color: "white",
-        fontSize: "16px",
-        font: "futura",
+        fontSize: "25px",
+        fontFamily: "'Futura Rener', sans-serif",
         cursor: "pointer",
         boxShadow: "0 0 6px white",
     };
@@ -51,6 +52,7 @@ export default function FiveTextBoxes() {
                 alignItems: "center",
                 textAlign: "left",
                 margin: "0 auto",
+
             }}
         >
             <div
@@ -85,7 +87,7 @@ export default function FiveTextBoxes() {
                 marginTop: "1000px",
             }}
         >
-            <TopBanner text="cosmology" />
+            <TopBannercreator text="cosmology" />
             <BoxWithButton index={0} link="https://en.wikipedia.org/wiki/Cosmology">
                 <span style={{
                     color: "black",
@@ -154,7 +156,7 @@ export default function FiveTextBoxes() {
                 Cosmic Microwave Background Radiation — faint “afterglow” left over from the early universe.<br />
                 Redshift of galaxies — galaxies are moving away from us, meaning space itself is expanding.<br />
             </BoxWithButton>
-            <TopBanner text="Scientific Theory" />
+            <TopBannercreator text="Scientific Theory" />
             <BoxWithButton index={1} link="https://en.wikipedia.org/wiki/Steady_state_theory">
                 <span style={{
                     color: "black",
@@ -195,7 +197,7 @@ export default function FiveTextBoxes() {
                     Why it lost favor:</span> Observations of the cosmic microwave background strongly support a hot, dense origin, contradicting steady state predictions.<br />
             </BoxWithButton>
 
-            <TopBanner text="Modern Physics and Big Bang" />
+            <TopBannercreator text="Modern Physics and Big Bang" />
             <BoxWithButton index={2} link="https://en.wikipedia.org/wiki/Big_Bang">
                 <span style={{
                     color: "black",
@@ -237,7 +239,7 @@ export default function FiveTextBoxes() {
                     Why it’s intriguing:</span> It could explain why the laws of physics are so “fine-tuned” — we live in a universe where the conditions happen to allow life.<br />
             </BoxWithButton>
 
-            <TopBanner text="Ancient Indian Cosmology" />
+            <TopBannercreator text="Ancient Indian Cosmology" />
             <BoxWithButton index={3} link="https://en.wikipedia.org/wiki/Indian_cosmology">
                 <span style={{
                     color: "black",
@@ -283,7 +285,7 @@ export default function FiveTextBoxes() {
                     Why it appeals:</span> It avoids an absolute “first moment” by making time infinite in both directions.<br />
             </BoxWithButton>
 
-            <TopBanner text="Religion and Universe Creation" />
+            <TopBannercreator text="Religion and Universe Creation" />
             <BoxWithButton index={4} link="https://www.learnreligions.com/creation-of-the-universe-2004201">
                 <span style={{
                     color: "black",
