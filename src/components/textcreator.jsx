@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import TopBannercreator from "./accessories/topbannercreator";
+import WhoCreated from "./accessories/creatortyper";
 
 
 export default function FiveTextBoxes() {
@@ -72,278 +73,281 @@ export default function FiveTextBoxes() {
 
 
     return (
-        <div
-            style={{
-                position: "absolute",
-                top: "50%",
-                left: "50%",
-                transform: "translate(-50%, -50%)",
-                zIndex: 9,
-                display: "flex",
-                flexDirection: "column", // keeps vertical on all sizes
-                gap: "40px",
-                padding: "50px",
-                alignItems: "center",
-                marginTop: width > 1024 ? "1000px" : "2000px", // smaller margin on mobile
+        <>
+            <WhoCreated />
+            <div
+                style={{
+                    position: "absolute",
+                    top: "50%",
+                    left: "50%",
+                    transform: "translate(-50%, -50%)",
+                    zIndex: 9,
+                    display: "flex",
+                    flexDirection: "column", // keeps vertical on all sizes
+                    gap: "40px",
+                    padding: "50px",
+                    alignItems: "center",
+                    marginTop: width > 1024 ? "1000px" : "2000px", // smaller margin on mobile
 
-            }}
-        >
-            <TopBannercreator text="cosmology" />
-            <BoxWithButton index={0} link="https://en.wikipedia.org/wiki/Cosmology">
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Group:</span> Mainstream science & cosmology <br />
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Core Idea:</span> The universe began about 13.8 billion years ago from an extremely hot, dense singularity (a point of infinite density).<br />
+                }}
+            >
+                <TopBannercreator text="cosmology" />
+                <BoxWithButton index={0} link="https://en.wikipedia.org/wiki/Cosmology">
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Group:</span> Mainstream science & cosmology <br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Core Idea:</span> The universe began about 13.8 billion years ago from an extremely hot, dense singularity (a point of infinite density).<br />
 
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    What Happened:</span><br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        What Happened:</span><br />
 
-                <span style={{
-                    //color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
+                    <span style={{
+                        //color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
 
-                }}>
-                    Inflation phase:</span> The singularity expanded incredibly rapidly in less than a second.<br />
+                    }}>
+                        Inflation phase:</span> The singularity expanded incredibly rapidly in less than a second.<br />
 
-                <span style={{
-                    //color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
+                    <span style={{
+                        //color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
 
-                }}>
-                    Cooling:</span> As it expanded, temperatures dropped, allowing matter to form.<br />
-                <span style={{
-                    //color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
+                    }}>
+                        Cooling:</span> As it expanded, temperatures dropped, allowing matter to form.<br />
+                    <span style={{
+                        //color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
 
-                }}>
-                    Structure formation:</span> Hydrogen and helium gases formed stars, galaxies, and planets over billions of years.<br />
+                    }}>
+                        Structure formation:</span> Hydrogen and helium gases formed stars, galaxies, and planets over billions of years.<br />
 
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Evidence:</span><br />
-                Cosmic Microwave Background Radiation — faint “afterglow” left over from the early universe.<br />
-                Redshift of galaxies — galaxies are moving away from us, meaning space itself is expanding.<br />
-            </BoxWithButton>
-            <TopBannercreator text="Scientific Theory" />
-            <BoxWithButton index={1} link="https://en.wikipedia.org/wiki/Steady_state_theory">
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Group: </span> Alternative scientific theory (popular in the 1940s–1960s)<br />
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Core Idea:</span> The universe has no beginning and no end — it is eternal and unchanging on a large scale.<br />
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    How it works: </span><br />
-                As the universe expands, new matter is continuously created so that the density remains constant.<br />
-                This avoids the need for a singular “creation moment.”<br />
-                <span style={{
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Evidence:</span><br />
+                    Cosmic Microwave Background Radiation — faint “afterglow” left over from the early universe.<br />
+                    Redshift of galaxies — galaxies are moving away from us, meaning space itself is expanding.<br />
+                </BoxWithButton>
+                <TopBannercreator text="Scientific Theory" />
+                <BoxWithButton index={1} link="https://en.wikipedia.org/wiki/Steady_state_theory">
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Group: </span> Alternative scientific theory (popular in the 1940s–1960s)<br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Core Idea:</span> The universe has no beginning and no end — it is eternal and unchanging on a large scale.<br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        How it works: </span><br />
+                    As the universe expands, new matter is continuously created so that the density remains constant.<br />
+                    This avoids the need for a singular “creation moment.”<br />
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    Why it lost favor:</span> Observations of the cosmic microwave background strongly support a hot, dense origin, contradicting steady state predictions.<br />
-            </BoxWithButton>
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        Why it lost favor:</span> Observations of the cosmic microwave background strongly support a hot, dense origin, contradicting steady state predictions.<br />
+                </BoxWithButton>
 
-            <TopBannercreator text="Modern Physics and Big Bang" />
-            <BoxWithButton index={2} link="https://en.wikipedia.org/wiki/Big_Bang">
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Group:</span> Modern cosmology & theoretical physics<br />
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Core Idea:</span> The Big Bang wasn’t the absolute beginning — instead, inflation is eternal, constantly creating “bubble universes” within a larger multiverse.<br />
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    How it works: </span><br />
-                Different regions of space stop inflating at different times, creating independent universes with possibly different physics.<br />
+                <TopBannercreator text="Modern Physics and Big Bang" />
+                <BoxWithButton index={2} link="https://en.wikipedia.org/wiki/Big_Bang">
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Group:</span> Modern cosmology & theoretical physics<br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Core Idea:</span> The Big Bang wasn’t the absolute beginning — instead, inflation is eternal, constantly creating “bubble universes” within a larger multiverse.<br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        How it works: </span><br />
+                    Different regions of space stop inflating at different times, creating independent universes with possibly different physics.<br />
 
-                Our universe is just one “bubble” among countless others.<br />
-                <span style={{
+                    Our universe is just one “bubble” among countless others.<br />
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
 
-                }}>
-                    Why it’s intriguing:</span> It could explain why the laws of physics are so “fine-tuned” — we live in a universe where the conditions happen to allow life.<br />
-            </BoxWithButton>
+                    }}>
+                        Why it’s intriguing:</span> It could explain why the laws of physics are so “fine-tuned” — we live in a universe where the conditions happen to allow life.<br />
+                </BoxWithButton>
 
-            <TopBannercreator text="Ancient Indian Cosmology" />
-            <BoxWithButton index={3} link="https://en.wikipedia.org/wiki/Indian_cosmology">
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Group:</span> Ancient Indian cosmology, modern theoretical physics variants <br />
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>Core Idea:</span> The universe goes through endless cycles of birth, expansion, collapse, and rebirth.<br />
+                <TopBannercreator text="Ancient Indian Cosmology" />
+                <BoxWithButton index={3} link="https://en.wikipedia.org/wiki/Indian_cosmology">
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Group:</span> Ancient Indian cosmology, modern theoretical physics variants <br />
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>Core Idea:</span> The universe goes through endless cycles of birth, expansion, collapse, and rebirth.<br />
 
-                <span style={{
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    Ancient version:</span> Hindu cosmology describes creation and destruction cycles (Kalpas) overseen by cosmic deities.<br />
-                <span style={{
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        Ancient version:</span> Hindu cosmology describes creation and destruction cycles (Kalpas) overseen by cosmic deities.<br />
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    Modern version:</span> Physics-based models like Ekpyrotic Universe propose that brane collisions (in string theory) could trigger repeated Big Bang–like events.<br />
-                <span style={{
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        Modern version:</span> Physics-based models like Ekpyrotic Universe propose that brane collisions (in string theory) could trigger repeated Big Bang–like events.<br />
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    Why it appeals:</span> It avoids an absolute “first moment” by making time infinite in both directions.<br />
-            </BoxWithButton>
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        Why it appeals:</span> It avoids an absolute “first moment” by making time infinite in both directions.<br />
+                </BoxWithButton>
 
-            <TopBannercreator text="Religion and Universe Creation" />
-            <BoxWithButton index={4} link="https://www.learnreligions.com/creation-of-the-universe-2004201">
-                <span style={{
-                    color: "black",
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    textDecoration: "underline", /* Underline text */
-                    backgroundColor: "white"  // camelCase, no semicolon
-                }}>
-                    Group:</span> Muslims<br />
-                The theories above reflect various human perspectives on how the universe began, yet none offer conclusive proof.<br />
-                The Qur’an, revealed centuries ago, presents the most compelling account, with the following verses describing the universe’s creation.<br />
+                <TopBannercreator text="Religion and Universe Creation" />
+                <BoxWithButton index={4} link="https://www.learnreligions.com/creation-of-the-universe-2004201">
+                    <span style={{
+                        color: "black",
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        textDecoration: "underline", /* Underline text */
+                        backgroundColor: "white"  // camelCase, no semicolon
+                    }}>
+                        Group:</span> Muslims<br />
+                    The theories above reflect various human perspectives on how the universe began, yet none offer conclusive proof.<br />
+                    The Qur’an, revealed centuries ago, presents the most compelling account, with the following verses describing the universe’s creation.<br />
 
-                <span style={{
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    Surah Al-A'raf, verse 54:</span><br />
-                "Indeed, your Lord is Allah, who created the heavens and the earth in six Days, then established Himself on the Throne.<br /> He covers the night with the day, which is in hot pursuit,
-                and (created) the sun, the moon, and the stars, all subjected to His command.<br /> Surely, His is the creation and the command. Blessed is Allah, the Lord of the worlds,"<br />
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        Surah Al-A'raf, verse 54:</span><br />
+                    "Indeed, your Lord is Allah, who created the heavens and the earth in six Days, then established Himself on the Throne.<br /> He covers the night with the day, which is in hot pursuit,
+                    and (created) the sun, the moon, and the stars, all subjected to His command.<br /> Surely, His is the creation and the command. Blessed is Allah, the Lord of the worlds,"<br />
 
-                <span style={{
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    (Al Quran 2:117)</span><br />
-                "He is the Originator of the heavens and the earth, and when He decrees something, He says only, ‘Be,’ and it is."<br />
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        (Al Quran 2:117)</span><br />
+                    "He is the Originator of the heavens and the earth, and when He decrees something, He says only, ‘Be,’ and it is."<br />
 
-                <span style={{
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    (Al Quran 29:20)</span><br />
-                "Travel in the earth and see how He makes the first creation, then Allah creates the latter creation; <br />surely Allah has power over all things"<br />
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        (Al Quran 29:20)</span><br />
+                    "Travel in the earth and see how He makes the first creation, then Allah creates the latter creation; <br />surely Allah has power over all things"<br />
 
-                <span style={{
+                    <span style={{
 
-                    fontWeight: "bold",
-                    fontStyle: "italic",       /* Make text italic */
-                    fontSize: "20px",          /* Change text size */
-                    // camelCase, no semicolon
-                }}>
-                    The Creator:</span><br />
+                        fontWeight: "bold",
+                        fontStyle: "italic",       /* Make text italic */
+                        fontSize: "20px",          /* Change text size */
+                        // camelCase, no semicolon
+                    }}>
+                        The Creator:</span><br />
 
-                Many believe that this vast universe was brought into existence by One — whether through science, a miracle, or both.<br />
-                With our human minds, we understand that nothing comes from nothing; by definition, nothing does not exist. It follows, then, that there must be a Creator<br />
-                One who fashioned everything, from the tiniest atom to galaxies that stretch across millions of light years.<br />
-            </BoxWithButton>
-        </div >
+                    Many believe that this vast universe was brought into existence by One — whether through science, a miracle, or both.<br />
+                    With our human minds, we understand that nothing comes from nothing; by definition, nothing does not exist. It follows, then, that there must be a Creator<br />
+                    One who fashioned everything, from the tiniest atom to galaxies that stretch across millions of light years.<br />
+                </BoxWithButton>
+            </div >
+        </>
     );
 }

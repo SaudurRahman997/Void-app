@@ -36,12 +36,12 @@ export default function Stars() {
     ];
 
     const stars = [
-        { image: arcTexture, title: "Explore Arcturus", href: "#K-section" },
-        { image: betelTexture, title: "Explore Betelgeuse", href: "#M-section" },
-        { image: ZetaTexture, title: "Explore Zeta", href: "#B-section" },
-        { image: sunTexture, title: "Explore Sun", href: "#G-section" },
-        { image: siriusTexture, title: "Explore Sirius", href: "#A-section" },
-        { image: rigelTexture, title: "Explore Rigel", href: "#O-section" },
+        { image: arcTexture, title: "K  Type", href: "#K-section" },
+        { image: betelTexture, title: "M  Type", href: "#M-section" },
+        { image: ZetaTexture, title: "B  Type", href: "#B-section" },
+        { image: sunTexture, title: "G  Type", href: "#G-section" },
+        { image: siriusTexture, title: "A  Type", href: "#A-section" },
+        { image: rigelTexture, title: "O  Type", href: "#O-section" },
     ];
 
     return (

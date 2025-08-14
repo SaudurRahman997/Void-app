@@ -8,35 +8,32 @@ export default function LeftStarFacts({ fact, galaxy }) {
     const [error, setError] = useState("");
 
     const starImages = {
-        k: [
-            "/images/k1.jpeg",
-            "/images/k2.jpeg"
+        "k type": [
+            "./textures/k1.jpeg",
+            "./textures/k2.jpeg"
         ],
-        m: [
-            "/images/m1.jpeg",
-            "/images/m2.jpeg"
+        "m type": [
+            "./textures/m1.jpeg",
+            "./textures/m2.jpeg"
         ],
-        g: [
-            "/images/g1.jpeg",
-            "/images/g2.jpeg"
+        "g type": [
+            "./textures/g1.jpeg",
+            "./textures/g2.jpeg"
         ],
-        f: [
-            "/images/f1.jpeg",
-            "/images/f2.jpeg"
+        "a type": [
+            "/textures/a1.jpeg",
+            "/textures/a2.jpeg"
         ],
-        a: [
-            "/images/a1.jpeg",
-            "/images/a2.jpeg"
+        "b type": [
+            "./textures/b1.jpeg",
+            "./textures/b2.jpeg"
         ],
-        b: [
-            "/images/b1.jpeg",
-            "/images/b2.jpeg"
-        ],
-        o: [
-            "/images/o1.jpeg",
-            "/images/o2.jpeg"
+        "o type": [
+            "./textures/o1.jpeg",
+            "./textures/o2.jpeg"
         ]
     };
+
 
     const maxUserFacts = 5;
     const userAddedFacts = facts.length - fact.length;
@@ -83,18 +80,18 @@ export default function LeftStarFacts({ fact, galaxy }) {
 
 
     useEffect(() => {
-        if (!galaxy || galaxy.trim().length < 3) return;
+        if (!galaxy) return;
 
-        fetch(`https://images-api.nasa.gov/search?q=${galaxy}&media_type=image`)
-            .then((res) => res.json())
-            .then((data) => {
-                const items = data.collection.items.slice(0, 10);
-                const imageUrls = items
-                    .map((item) => item.links?.[0]?.href)
-                    .filter((url) => url);
-                setImages(imageUrls);
-            })
-            .catch((err) => console.error("NASA API error:", err));
+        const lowerGalaxy = galaxy.toLowerCase();
+        if (starImages[lowerGalaxy]) {
+            setImages(starImages[lowerGalaxy]);
+        } else {
+            // fallback if no matching type found
+            setImages([
+                "/images/default1.jpeg",
+                "/images/default2.jpeg"
+            ]);
+        }
     }, [galaxy]);
 
     useEffect(() => {
@@ -169,16 +166,18 @@ export default function LeftStarFacts({ fact, galaxy }) {
             </div>
 
             {/* Gallery Section (bottom on mobile, right on desktop) */}
-            <div className="w-full lg:w-1/2 max-h-[470px]  p-4 bg-white/10 backdrop-blur-md rounded-xl overflow-y-scroll scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-gray-800">
-                <h2 className="text-xl font-semibold mb-4 font-orbitron text-yellow-400">{galaxy} Gallery</h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-2 w-full">
+            <div className="w-full lg:w-1/2 max-h-[470px] p-4 bg-white/10 backdrop-blur-md rounded-xl overflow-y-hidden">
+                <h2 className="text-xl font-semibold mb-4 font-orbitron text-yellow-400">
+                    {galaxy} Gallery
+                </h2>
+                <div className="grid grid-rows-2 gap-2 w-full h-[400px]">
                     {images.length > 0 ? (
                         images.map((url, index) => (
                             <img
                                 key={index}
                                 src={url}
                                 alt={`Galaxy ${index}`}
-                                className="w-full h-[200px] object-cover rounded shadow"
+                                className="w-full h-full object-cover rounded shadow"
                             />
                         ))
                     ) : (
@@ -186,6 +185,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
                     )}
                 </div>
             </div>
+
         </div>
     );
 }

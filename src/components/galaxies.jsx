@@ -37,7 +37,7 @@ export default function Galaxies() {
 
                 <section id="c-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="UGC 87" />
-                    <LeftFacts fact={galaxyFacts.ugc} galaxy="UGC" />
+                    <LeftFacts fact={galaxyFacts.ugc} galaxy="ugc" />
                 </section>
 
                 <section id="d-section" className="min-h-screen px-8 pt-24">
@@ -52,7 +52,7 @@ export default function Galaxies() {
 
                 <section id="f-section" className="min-h-screen px-8 pt-24">
                     <TopBanner text="Centaurus A" />
-                    <LeftFacts fact={galaxyFacts.centaurus} galaxy="centaurus_A" />
+                    <LeftFacts fact={galaxyFacts.centaurus} galaxy="centaurus" />
                 </section>
 
                 <section id="g-section" className="min-h-screen px-8 pt-24">

@@ -80,7 +80,7 @@ export default function PinContainer({ imageUrl, title, href = "/", entryAnimati
                 transition={{ duration: 0.3 }}
             >
                 <div className="relative flex items-center space-x-2 z-10 rounded-full bg-black/70 py-1 px-4 ring-1 ring-white/10">
-                    <span className="text-white text-sm md:text-base font-glitch">{title}</span>
+                    <span className="text-white text-sm md:text-base font-higher">{title}</span>
                 </div>
             </motion.div>
         </motion.div>

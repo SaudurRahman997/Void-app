@@ -11,6 +11,11 @@ export default {
         futura: ['Futura Rener', 'sans-serif'],
         noxis: ['Noxis', 'sans-serif'],
         siegra: ['Siegra', 'sans-serif'],
+        astroz: ['Astroz Style', 'sans-serif'],
+        death: ['Death Star', 'sans-serif'],
+        rocky: ['Rockybilly', 'sans-serif'],
+        higher: ['Higher Jump', 'sans-serif'],
+        awesome: ['Awesome', 'sans-serif'],
       },
       animation: {
         'glow': 'glow 2s ease-in-out infinite',           // existing blue

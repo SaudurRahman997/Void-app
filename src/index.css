@@ -38,6 +38,24 @@
 
 }
 
+@font-face {
+    font-family: 'Astroz Style';
+    src: url('./assets/fonts/Astroz_Trial.ttf') format('opentype');
+
+}
+
+@font-face {
+    font-family: 'Awesome';
+    src: url('./assets/fonts/Awesome.ttf') format('opentype');
+
+}
+
+@font-face {
+    font-family: 'Higher Jump';
+    src: url('./assets/fonts/Higher_Jump.ttf') format('opentype');
+
+}
+
 
 /* src/index.css or similar */
 /* src/index.css or equivalent */

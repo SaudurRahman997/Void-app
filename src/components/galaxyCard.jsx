@@ -46,7 +46,7 @@ export default function GalaxyCard({ image, title, targetId }) {
                 </div>
 
                 {/* Title Section */}
-                <div className="w-full bg-white/10 backdrop-blur-md p-3 text-center font-glitch text-xl lg:text-2xl text-white">
+                <div className="w-full bg-white/10 backdrop-blur-md p-3 text-center font-higher text-xl lg:text-2xl text-white">
                     <h2 className="text-sm lg:text-base group-hover:text-blue-400 transition duration-300">
                         {title}
                     </h2>

@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import CustomButton from "../accessories/articlebutton";
+import CustomButtonplanet from "../accessories/articlebuttonplanet";
 
 
 
@@ -59,12 +59,7 @@ export default function LeftPlanetFacts({ galaxy }) {
             "./textures/neptune3.jpeg",
             "./textures/neptune4.jpeg",
         ],
-        pluto: [ // optional
-            "./textures/pluto1.jpeg",
-            "./textures/pluto2.jpeg",
-            "./textures/pluto3.jpeg",
-            "./textures/pluto4.jpeg",
-        ],
+
     };
 
 
@@ -195,12 +190,12 @@ export default function LeftPlanetFacts({ galaxy }) {
                     {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                 </div>
                 <div className="mt-6">
-                    <CustomButton href="https://en.wikipedia.org/wiki/Mercury_(planet)">Article</CustomButton>
+                    <CustomButtonplanet href="https://en.wikipedia.org/wiki/Mercury_(planet)">Article</CustomButtonplanet>
                 </div>
             </div>
 
             {/* Gallery */}
-            <div className="w-full lg:w-1/2 p-4 bg-white/10 backdrop-blur-md rounded-xl max-h-[470px] overflow-y-scroll scrollbar-thin scrollbar-thumb-yellow-300 scrollbar-track-gray-800">
+            <div className="w-full lg:w-1/2 p-4 bg-white/10 backdrop-blur-md rounded-xl max-h-[470px] overflow-y-scroll scrollbar-thin scrollbar-thumb-purple-300 scrollbar-track-gray-800">
                 <h2 className="text-xl font-semibold mb-4 font-orbitron text-purple-400">{galaxy} Gallery</h2>
                 <div className="grid grid-cols-2 gap-2 w-full">
                     {images.length > 0 ? (
