@@ -1,7 +1,6 @@
 import { useState, useEffect } from "react";
 import CustomButtonplanet from "../accessories/articlebuttonplanet";
-
-
+import Button from "../accessories/delete";
 
 
 export default function LeftPlanetFacts({ galaxy }) {
@@ -9,6 +8,18 @@ export default function LeftPlanetFacts({ galaxy }) {
     const [newFact, setNewFact] = useState("");
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
+
+    const planetLinks = {
+        mercury: "https://en.wikipedia.org/wiki/Mercury_(planet)",
+        venus: "https://en.wikipedia.org/wiki/Venus",
+        earth: "https://en.wikipedia.org/wiki/Earth",
+        mars: "https://en.wikipedia.org/wiki/Mars",
+        jupiter: "https://en.wikipedia.org/wiki/Jupiter",
+        saturn: "https://en.wikipedia.org/wiki/Saturn",
+        uranus: "https://en.wikipedia.org/wiki/Uranus",
+        neptune: "https://en.wikipedia.org/wiki/Neptune"
+    };
+
 
     const planetImages = {
         mercury: [
@@ -146,7 +157,7 @@ export default function LeftPlanetFacts({ galaxy }) {
             <div className="w-full lg:w-1/2 flex flex-col items-center">
                 <div className="w-full p-6 rounded-lg border-2 border-purple-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)]">
                     <h2 className="text-2xl font-orbitron mb-4 text-purple-300">{galaxy} Facts</h2>
-                    <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
+                    <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl  scrollbar-thin scrollbar-thumb-purple-400 scrollbar-track-transparent">
                         {facts.map((fact, idx) => (
                             <li
                                 key={fact._id || idx}
@@ -159,7 +170,7 @@ export default function LeftPlanetFacts({ galaxy }) {
                                         className="text-red-500 hover:text-red-700"
                                         aria-label="Delete fact"
                                     >
-                                        🗑
+                                        <Button />
                                     </button>
                                 )}
                             </li>
@@ -190,7 +201,9 @@ export default function LeftPlanetFacts({ galaxy }) {
                     {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                 </div>
                 <div className="mt-6">
-                    <CustomButtonplanet href="https://en.wikipedia.org/wiki/Mercury_(planet)">Article</CustomButtonplanet>
+                    <CustomButtonplanet href={planetLinks[galaxy?.toLowerCase()] || "https://en.wikipedia.org/wiki/Planet"}>
+                        Article
+                    </CustomButtonplanet>
                 </div>
             </div>
 

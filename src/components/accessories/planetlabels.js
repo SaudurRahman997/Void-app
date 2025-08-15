@@ -3,7 +3,7 @@ import * as THREE from 'three';
 function createLabel(text, position, sectionId) {
     const canvas = document.createElement("canvas");
     const context = canvas.getContext("2d");
-    context.font = "Bold 70px 'Beauty Glitch Demo'";
+    context.font = "Bold 40px 'Beauty Glitch Demo'";
     context.fillStyle = "white";
     context.fillText(text, 0, 50);
 

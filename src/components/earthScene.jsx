@@ -8,11 +8,10 @@ const EarthScene = () => {
     const containerRef = useRef(null);
     const rendererRef = useRef();
     const [smallScreen, setSmallScreen] = useState(window.innerWidth < 1024);
+    const [gpuError, setGpuError] = useState(false); // GPU failure flag
 
-    // 📏 Function to check size
     const isSmall = () => window.innerWidth < 1024;
 
-    // 📏 Update smallScreen state on resize
     useEffect(() => {
         const handleResizeCheck = () => setSmallScreen(isSmall());
         handleResizeCheck();
@@ -20,7 +19,6 @@ const EarthScene = () => {
         return () => window.removeEventListener('resize', handleResizeCheck);
     }, []);
 
-    // 📏 Fix mobile 100vh issue
     useEffect(() => {
         const setVh = () => {
             document.documentElement.style.setProperty('--vh', `${window.innerHeight * 0.01}px`);
@@ -31,151 +29,187 @@ const EarthScene = () => {
     }, []);
 
     useEffect(() => {
-        document.body.style.overflow = 'hidden'; // 🚫 Prevent scrolling
+        document.body.style.overflow = 'hidden';
         const container = containerRef.current;
         if (!container) return;
 
         let width = window.innerWidth;
         let height = window.innerHeight;
 
-        const scene = new THREE.Scene();
+        try {
+            const scene = new THREE.Scene();
 
-        const loader = new THREE.TextureLoader();
-        const earthTexture = loader.load('/textures/earthh.jpg');
-        const sunTexture = loader.load('/textures/moon.jpg');
-        scene.background = new THREE.Color(0x000000);
+            const loader = new THREE.TextureLoader();
+            const earthTexture = loader.load('/textures/earthh.jpg');
+            const sunTexture = loader.load('/textures/moon.jpg');
+            scene.background = new THREE.Color(0x000000);
 
-        const geometry = new THREE.SphereGeometry(3, 64, 64);
-        const geometry1 = new THREE.SphereGeometry(3, 64, 64);
+            const geometry = new THREE.SphereGeometry(3, 64, 64);
+            const geometry1 = new THREE.SphereGeometry(3, 64, 64);
 
-        const material1 = new THREE.MeshStandardMaterial({ map: sunTexture });
-        const sun = new THREE.Mesh(geometry1, material1);
-        sun.position.set(-5, 3, 2);
-        sun.scale.set(0.2, 0.2, 0.2);
-        scene.add(sun);
+            const material1 = new THREE.MeshStandardMaterial({ map: sunTexture });
+            const sun = new THREE.Mesh(geometry1, material1);
+            sun.position.set(-5, 3, 2);
+            sun.scale.set(0.2, 0.2, 0.2);
+            scene.add(sun);
 
-        const material = new THREE.MeshStandardMaterial({ map: earthTexture });
-        const earth = new THREE.Mesh(geometry, material);
-        earth.rotation.y = Math.PI * 2 / 3;
+            const material = new THREE.MeshStandardMaterial({ map: earthTexture });
+            const earth = new THREE.Mesh(geometry, material);
+            earth.rotation.y = Math.PI * 2 / 3;
+            earth.position.set(0, -50, -20);
 
-        earth.position.set(0, -50, -20);
+            let earthScale = window.innerWidth < 768 ? 1.2 : 2;
+            earth.scale.set(earthScale, earthScale, earthScale);
+            scene.add(earth);
 
-        let earthScale = window.innerWidth < 768 ? 1.2 : 2;
-        earth.scale.set(earthScale, earthScale, earthScale);
-        scene.add(earth);
+            gsap.to(earth.position, {
+                duration: 1,
+                x: 6,
+                y: -2,
+                z: 0,
+                ease: "power4.out",
+                delay: 0.5
+            });
 
-        gsap.to(earth.position, {
-            duration: 1,
-            x: 6,
-            y: -2,
-            z: 0,
-            ease: "power4.out",
-            delay: 0.5
-        });
+            // Star field
+            const starGeometry = new THREE.BufferGeometry();
+            const starCount = 10000;
+            const starPositions = new Float32Array(starCount * 3);
 
-        const starGeometry = new THREE.BufferGeometry();
-        const starCount = 10000;
-        const starPositions = new Float32Array(starCount * 3);
+            function randomSpherePoint(radiusMin = 100, radiusMax = 300) {
+                const u = Math.random();
+                const v = Math.random();
+                const theta = 2 * Math.PI * u;
+                const phi = Math.acos(2 * v - 1);
+                const r = radiusMin + Math.random() * (radiusMax - radiusMin);
 
-        function randomSpherePoint(radiusMin = 100, radiusMax = 300) {
-            const u = Math.random();
-            const v = Math.random();
-            const theta = 2 * Math.PI * u;
-            const phi = Math.acos(2 * v - 1);
-            const r = radiusMin + Math.random() * (radiusMax - radiusMin);
+                const sinPhi = Math.sin(phi);
+                const x = r * sinPhi * Math.cos(theta);
+                const y = r * sinPhi * Math.sin(theta);
+                const z = r * Math.cos(phi);
 
-            const sinPhi = Math.sin(phi);
-            const x = r * sinPhi * Math.cos(theta);
-            const y = r * sinPhi * Math.sin(theta);
-            const z = r * Math.cos(phi);
+                return { x, y, z };
+            }
 
-            return { x, y, z };
-        }
+            for (let i = 0; i < starCount; i++) {
+                const index = i * 3;
+                const { x, y, z } = randomSpherePoint(100, 300);
+                starPositions[index] = x;
+                starPositions[index + 1] = y;
+                starPositions[index + 2] = z;
+            }
 
-        for (let i = 0; i < starCount; i++) {
-            const index = i * 3;
-            const { x, y, z } = randomSpherePoint(100, 300);
-            starPositions[index] = x;
-            starPositions[index + 1] = y;
-            starPositions[index + 2] = z;
-        }
+            starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
 
-        starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
+            const starMaterial = new THREE.PointsMaterial({
+                size: 0.5,
+                sizeAttenuation: true,
+                transparent: true,
+                alphaTest: 0.01,
+                depthWrite: false,
+                blending: THREE.AdditiveBlending,
+                color: 0xffffff
+            });
 
-        const starMaterial = new THREE.PointsMaterial({
-            size: 0.5,
-            sizeAttenuation: true,
-            transparent: true,
-            alphaTest: 0.01,
-            depthWrite: false,
-            blending: THREE.AdditiveBlending,
-            color: 0xffffff
-        });
+            const stars = new THREE.Points(starGeometry, starMaterial);
+            scene.add(stars);
 
-        const stars = new THREE.Points(starGeometry, starMaterial);
-        scene.add(stars);
+            const sunlight = new THREE.DirectionalLight(0xfff5c0, 2);
+            sunlight.position.set(10, 10, 5);
+            scene.add(sunlight);
 
-        const sunlight = new THREE.DirectionalLight(0xfff5c0, 2);
-        sunlight.position.set(10, 10, 5);
-        scene.add(sunlight);
+            const ambient = new THREE.AmbientLight(0xffffff, 0.1);
+            scene.add(ambient);
 
-        const ambient = new THREE.AmbientLight(0xffffff, 0.1);
-        scene.add(ambient);
+            const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
+            camera.position.set(0, 0, 15);
+            scene.add(camera);
 
-        const camera = new THREE.PerspectiveCamera(45, width / height, 0.1, 1000);
-        camera.position.set(0, 0, 15);
-        scene.add(camera);
-
-        const renderer = new THREE.WebGLRenderer({ antialias: true });
-        renderer.setPixelRatio(window.devicePixelRatio);
-        renderer.setSize(width, height);
-        container.appendChild(renderer.domElement);
-        rendererRef.current = renderer;
-
-        const controls = new OrbitControls(camera, renderer.domElement);
-        controls.enableDamping = true;
-        controls.enableZoom = false;
-        controls.enablePan = false;
-        controls.autoRotate = true;
-        controls.autoRotateSpeed = 4;
-
-        const handleResize = () => {
-            width = window.innerWidth;
-            height = window.innerHeight;
-            camera.aspect = width / height;
-            camera.updateProjectionMatrix();
+            const renderer = new THREE.WebGLRenderer({ antialias: true });
+            renderer.setPixelRatio(window.devicePixelRatio);
             renderer.setSize(width, height);
+            container.appendChild(renderer.domElement);
+            rendererRef.current = renderer;
 
-            if (window.innerWidth < 768) {
-                earth.scale.set(1.2, 1.2, 1.2);
-            } else {
-                earth.scale.set(2, 2, 2);
-            }
-        };
+            // Detect WebGL context loss
+            renderer.domElement.addEventListener("webglcontextlost", (event) => {
+                event.preventDefault();
+                setGpuError(true);
+            });
 
-        window.addEventListener('resize', handleResize);
+            const controls = new OrbitControls(camera, renderer.domElement);
+            controls.enableDamping = true;
+            controls.enableZoom = false;
+            controls.enablePan = false;
+            controls.autoRotate = true;
+            controls.autoRotateSpeed = 4;
 
-        const animate = () => {
-            controls.update();
-            sun.rotation.y += 0.05;
-            earth.rotation.y += 0.010;
-            renderer.render(scene, camera);
-            requestAnimationFrame(animate);
-        };
-        animate();
+            const handleResize = () => {
+                width = window.innerWidth;
+                height = window.innerHeight;
+                camera.aspect = width / height;
+                camera.updateProjectionMatrix();
+                renderer.setSize(width, height);
 
-        return () => {
-            window.removeEventListener('resize', handleResize);
-            controls.dispose();
-            if (rendererRef.current) {
-                rendererRef.current.dispose();
-                if (rendererRef.current.domElement && container.contains(rendererRef.current.domElement)) {
-                    container.removeChild(rendererRef.current.domElement);
+                if (window.innerWidth < 768) {
+                    earth.scale.set(1.2, 1.2, 1.2);
+                } else {
+                    earth.scale.set(2, 2, 2);
                 }
-            }
-            document.body.style.overflow = ''; // restore scrolling
-        };
+            };
+
+            window.addEventListener('resize', handleResize);
+
+            const animate = () => {
+                controls.update();
+                sun.rotation.y += 0.05;
+                earth.rotation.y += 0.010;
+                renderer.render(scene, camera);
+                requestAnimationFrame(animate);
+            };
+            animate();
+
+            return () => {
+                window.removeEventListener('resize', handleResize);
+                controls.dispose();
+                if (rendererRef.current) {
+                    rendererRef.current.dispose();
+                    if (rendererRef.current.domElement && container.contains(rendererRef.current.domElement)) {
+                        container.removeChild(rendererRef.current.domElement);
+                    }
+                }
+                document.body.style.overflow = '';
+            };
+        } catch (error) {
+            setGpuError(true);
+        }
     }, []);
+
+    // Fallback UI if GPU fails
+    if (gpuError) {
+        return (
+            <div className="flex flex-col items-center justify-center w-screen h-screen bg-black text-white p-6 text-center">
+                <motion.h1
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1 }}
+                    className="text-3xl font-bold mb-4"
+                >
+                    🚀 Unable to render space
+                </motion.h1>
+                <motion.p
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 1, delay: 0.5 }}
+                    className="max-w-md mb-6"
+                >
+                    Your device’s graphics power couldn’t keep up.
+                    For the best experience, open this on a desktop or laptop.
+                </motion.p>
+                <p className="text-sm opacity-70">Tip: Close other apps and try again.</p>
+            </div>
+        );
+    }
 
     return (
         <div className="overflow-hidden h-screen w-screen">

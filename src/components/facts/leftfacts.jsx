@@ -1,11 +1,30 @@
 import { useState, useEffect } from "react";
 import CustomButtongalaxy from "../accessories/articlebuttongalaxy";
+import Button from "../accessories/delete";
 
 export default function LeftFacts({ galaxy, fact }) {
     const [facts, setFacts] = useState([]);
     const [newFact, setNewFact] = useState("");
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
+
+    const galaxyArticles = {
+
+        milkyway: "https://en.wikipedia.org/wiki/Milky_Way",
+        andromeda: "https://en.wikipedia.org/wiki/Andromeda_Galaxy",
+        triangulum: "https://en.wikipedia.org/wiki/Triangulum_Galaxy",  // Messier 33 :contentReference[oaicite:0]{index=0}
+        sombrero: "https://en.wikipedia.org/wiki/Sombrero_Galaxy",
+        whirlpool: "https://en.wikipedia.org/wiki/Whirlpool_Galaxy",
+        pinwheel: "https://en.wikipedia.org/wiki/Pinwheel_Galaxy",     // M101 :contentReference[oaicite:1]{index=1}
+        messier: "https://en.wikipedia.org/wiki/Messier_object",       // Messier Catalog :contentReference[oaicite:2]{index=2}
+        centaurus: "https://en.wikipedia.org/wiki/Centaurus_A",          // Centaurus A :contentReference[oaicite:3]{index=3}
+        ugc: "https://en.wikipedia.org/wiki/Uppsala_General_Catalogue_of_Galaxies"  // UGC catalog :contentReference[oaicite:4]{index=4}
+
+
+    };
+
+
+
 
     const maxUserFacts = 5;
 
@@ -100,7 +119,7 @@ export default function LeftFacts({ galaxy, fact }) {
             <div className="w-full lg:w-1/2 flex flex-col items-center">
                 <div className="w-full p-6 rounded-lg border-2 border-blue-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)]">
                     <h2 className="text-2xl font-orbitron mb-4 text-blue-300">{galaxy} Facts</h2>
-                    <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
+                    <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl  scrollbar-thin scrollbar-thumb-blue-400 scrollbar-track-transparent">
                         {facts.map((fact, idx) => (
                             <li
                                 key={fact._id || idx}
@@ -113,7 +132,7 @@ export default function LeftFacts({ galaxy, fact }) {
                                         className="text-red-500 hover:text-red-700"
                                         aria-label="Delete fact"
                                     >
-                                        🗑
+                                        <Button />
                                     </button>
                                 )}
                             </li>
@@ -143,7 +162,10 @@ export default function LeftFacts({ galaxy, fact }) {
                     {error && <p className="text-red-500 text-sm mt-2">{error}</p>}
                 </div>
                 <div className="mt-6">
-                    <CustomButtongalaxy href="https://example.com">Article</CustomButtongalaxy>
+                    <CustomButtongalaxy href={galaxyArticles[galaxy?.toLowerCase()] || "https://en.wikipedia.org"}>
+                        Article
+                    </CustomButtongalaxy>
+
                 </div>
             </div>
 

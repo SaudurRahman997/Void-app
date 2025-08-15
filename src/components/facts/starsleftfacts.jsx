@@ -1,11 +1,23 @@
 import { useState, useEffect } from "react";
 import CustomButton from "../accessories/articlebutton";
+import Button from "../accessories/delete";
 
 export default function LeftStarFacts({ fact, galaxy }) {
     const [facts, setFacts] = useState(fact);
     const [newFact, setNewFact] = useState("");
     const [images, setImages] = useState([]);
     const [error, setError] = useState("");
+
+    const articleLinks = {
+        "O Type": "https://en.wikipedia.org/wiki/O-type_main-sequence_star",
+        "A Type": "https://en.wikipedia.org/wiki/A-type_main-sequence_star",
+        "M Type": "https://en.wikipedia.org/wiki/M-type_main-sequence_star",
+        "G Type": "https://en.wikipedia.org/wiki/G-type_main-sequence_star",
+        "K Type": "https://en.wikipedia.org/wiki/K-type_main-sequence_star",
+        "B Type": "https://en.wikipedia.org/wiki/B-type_main-sequence_star",
+        // Add more galaxies as needed
+    };
+
 
     const starImages = {
         "k type": [
@@ -119,7 +131,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
             <div className="w-full lg:w-1/2 flex flex-col items-center h-full">
                 <div className="w-full p-6 rounded-lg border-2 border-yellow-400 shadow-[0_0_20px_5px_rgba(255,255,0,0.6)] transition-shadow duration-300">
                     <h2 className="text-2xl font-orbitron mb-4 text-yellow-400">{galaxy} Facts</h2>
-                    <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl">
+                    <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl  scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-transparent">
                         {facts.map((fact, idx) => (
                             <li key={fact._id || idx} className="text-sm break-words flex items-center justify-between">
                                 <span>{idx + 1}. {fact.text}</span>
@@ -128,7 +140,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
                                         onClick={() => handleDelete(fact._id)}
                                         className="ml-2 text-red-500 hover:text-red-700"
                                     >
-                                        🗑
+                                        <Button />
                                     </button>
                                 )}
                             </li>
@@ -161,7 +173,10 @@ export default function LeftStarFacts({ fact, galaxy }) {
 
                 {/* Article Button */}
                 <div className="mt-6">
-                    <CustomButton href="https://example.com">Article</CustomButton>
+                    <CustomButton href={articleLinks[galaxy] || "https://example.com"}>
+                        Article
+                    </CustomButton>
+
                 </div>
             </div>
 
