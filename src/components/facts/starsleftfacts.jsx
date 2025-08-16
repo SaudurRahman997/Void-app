@@ -133,7 +133,7 @@ export default function LeftStarFacts({ fact, galaxy }) {
                     <h2 className="text-2xl font-orbitron mb-4 text-yellow-400">{galaxy} Facts</h2>
                     <ul className="space-y-2 mb-6 max-h-[60vh] overflow-y-auto pr-2 font-futura text-5xl  scrollbar-thin scrollbar-thumb-yellow-400 scrollbar-track-transparent">
                         {facts.map((fact, idx) => (
-                            <li key={fact._id || idx} className="text-sm break-words flex items-center justify-between">
+                            <li key={fact._id || idx} className="text-base break-words flex items-center justify-between">
                                 <span>{idx + 1}. {fact.text}</span>
                                 {!fact.isDefault && (
                                     <button

@@ -123,7 +123,7 @@ export default function LeftFacts({ galaxy, fact }) {
                         {facts.map((fact, idx) => (
                             <li
                                 key={fact._id || idx}
-                                className="text-sm break-words flex justify-between items-center"
+                                className="text-base break-words flex justify-between items-center"
                             >
                                 <span>{idx + 1}. {fact.text || fact}</span>
                                 {!fact.isDefault && (
