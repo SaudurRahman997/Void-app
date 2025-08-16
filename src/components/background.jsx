@@ -74,9 +74,10 @@ const Background = ({ trigger }) => {
 
             starGeometry.setAttribute('position', new THREE.BufferAttribute(starPositions, 3));
             const starMaterial = new THREE.PointsMaterial({
-                size: 0.5,
+                size: 0.5,               // bigger than 0.5
                 sizeAttenuation: true,
                 transparent: true,
+                opacity: 0.5,            // semi-transparent to give "soft blur"
                 depthWrite: false,
                 blending: THREE.AdditiveBlending,
                 color: 0xffffff
