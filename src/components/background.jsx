@@ -107,7 +107,7 @@ const Background = ({ trigger }) => {
             controls.enableZoom = false;
             controls.enablePan = false;
             controls.autoRotate = true;
-            controls.autoRotateSpeed = 4;
+            controls.autoRotateSpeed = 0.5;
 
             const handleResize = () => {
                 width = window.innerWidth;
